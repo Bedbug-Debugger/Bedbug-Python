@@ -20,7 +20,7 @@ def get_group(name: str = const.DEFAULT_GROUP_NAME) -> Group:
 
 
 def add_var(var) -> None:
-    pass
+    get_group().add_var(var)
 
 
 def plot() -> None:
