@@ -1,4 +1,4 @@
-class GroupNotFoundError(Exception):
+class GroupNotFoundError(KeyError):
     def __init__(self, key):
         self.message = f"GroupNotFoundError: group {key} does not exists."
 
