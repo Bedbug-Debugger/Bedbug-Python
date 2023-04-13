@@ -1,8 +1,11 @@
 from models.group import Group
 
+_groups: dict[str, Group] = {}
+
 
 def create_group(name: str) -> None:
-    pass
+    group = Group(name)
+    _groups[name] = group
 
 
 def get_group(name: str) -> Group:
