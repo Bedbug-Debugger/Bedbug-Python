@@ -1,11 +1,13 @@
 from models.group import Group
 import const
-from errors.group_not_found_error import GroupNotFoundError
+from errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 
 _groups: dict[str, Group] = {}
 
 
 def create_group(name: str) -> Group:
+    if name in _groups:
+        raise GroupAlreadyExistsError(name)
     group = Group(name)
     _groups[name] = group
     return group
