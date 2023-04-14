@@ -22,7 +22,7 @@ def get_group(name: str) -> Group:
     return _groups[name]
 
 
-def add_data(data, label: str) -> None:
+def add_data(label: str, data) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(data, label)
 
 
