@@ -21,8 +21,8 @@ def get_group(name: str) -> Group:
     return _groups[name]
 
 
-def add_data(var, label: str, group: str = const.DEFAULT_GROUP_NAME) -> None:
-    get_group(group).add_data(var, label)
+def add_data(data, label: str) -> None:
+    get_group(const.DEFAULT_GROUP_NAME).add_data(data, label)
 
 
 def plot() -> None:
