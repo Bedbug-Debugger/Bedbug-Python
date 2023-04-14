@@ -1,3 +1,5 @@
+# from multimethod import multimethod
+from typing import overload
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
@@ -21,13 +23,13 @@ def get_group(name: str) -> Group:
         raise GroupNotFoundError
     return _groups[name]
 
+@overload
+def add_data(data_dict: dict) -> None:
+    get_group(const.DEFAULT_GROUP_NAME).add_data(data_dict)
 
 def add_data(label: str, data) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(data, label)
 
-
-def add_data(data_dict: dict) -> None:
-    get_group(const.DEFAULT_GROUP_NAME).add_data(data_dict)
 
 
 def plot() -> None:
