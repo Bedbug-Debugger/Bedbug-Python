@@ -26,6 +26,10 @@ def add_data(label: str, data) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(data, label)
 
 
+def add_data(data_dict: dict) -> None:
+    get_group(const.DEFAULT_GROUP_NAME).add_data(data_dict)
+
+
 def plot() -> None:
     pass
 
