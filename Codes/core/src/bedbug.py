@@ -1,6 +1,7 @@
-from .models.group import Group
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
+from .models.group import Group
+from .models.time_manager import time
 
 _groups: dict[str, Group] = {
     const.DEFAULT_GROUP_NAME: Group(const.DEFAULT_GROUP_NAME)
