@@ -26,7 +26,7 @@ def add_data(data, label: str) -> None:
 
 
 def plot() -> None:
-    print('finally')
+    pass
 
 
 def dump_json(filename: str) -> None:
