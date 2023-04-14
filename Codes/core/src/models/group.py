@@ -1,4 +1,4 @@
-from time_manager import time
+from .time_manager import time
 
 class Group:
 
