@@ -2,7 +2,9 @@ from models.group import Group
 import const
 from errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 
-_groups: dict[str, Group] = {}
+_groups: dict[str, Group] = {
+    const.DEFAULT_GROUP_NAME: Group(const.DEFAULT_GROUP_NAME)
+}
 
 
 def create_group(name: str) -> Group:
@@ -15,8 +17,6 @@ def create_group(name: str) -> Group:
 
 def get_group(name: str) -> Group:
     if name not in _groups:
-        if name == const.DEFAULT_GROUP_NAME:
-            return create_group(const.DEFAULT_GROUP_NAME)
         raise GroupNotFoundError
     return _groups[name]
 
