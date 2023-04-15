@@ -2,7 +2,7 @@ from ...src import (
     bedbug as bd,
     const
 )
-from ...src.plot import pyplot_plotting
+from ...src.plot.pyplot_plotting import plot
 
 
 def test_with_default_group_and_one_variable():
@@ -37,10 +37,10 @@ def test_with_default_group_and_two_vars_and_pause():
     bd.add_data("b", b)
     bd.time.resume()
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
-    return
     a = 23
     bd.add_data("a", a)
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    plot()
 
 
 def run():
