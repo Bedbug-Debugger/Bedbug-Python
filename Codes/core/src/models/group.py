@@ -5,12 +5,12 @@ class Group:
 
     def __init__(self, name: str):
         self.name: str = name
-        self.vars: dict[str, list] = {}
+        self.vars: dict[str, dict] = {}
 
     def add_data_single(self, label: str, data) -> None:
         if label not in self.vars:
             self.vars[label] = []
-        self.vars[label].append((time.current_time, data))
+        self.vars[label][time.current_time] = data
         time.tick()
 
     def add_data_dict(self, data_dict: dict) -> None:
