@@ -1,4 +1,4 @@
-from typing import overload
+from overload import overload
 from .time_manager import time
 
 class Group:
@@ -20,11 +20,12 @@ class Group:
         time.resume()
     
     @overload
-    def add_data(self, label: str, data) -> None:
-        self.add_data_single(label, data)
-    
     def add_data(self, data_dict: dict) -> None:
         self.add_data_dict(data_dict)
+    
+    @add_data.add
+    def add_data(self, label: str, data) -> None:
+        self.add_data_single(label, data)
         
     def plot(self) -> None:
         pass
