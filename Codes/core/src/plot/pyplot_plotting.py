@@ -12,11 +12,11 @@ def get_signal_name(groupname, varname):
     return f"{groupname}/{varname}"
 
 
-def get_values_from_pair_list(time_value_pair_list: list, num_of_time_ticks: int) -> list:
+def get_values_from_dict(time_value_dict: dict, num_of_time_ticks: int) -> list:
     # Initialize values
     values = [PlotConst.EMPTY_VALUE] * num_of_time_ticks
     # Fill registered values
-    for time_index, value in time_value_pair_list:
+    for time_index, value in time_value_dict.items():
         values[time_index] = value
     # Fill empty values with last value, if any
     value_exists_before = False
@@ -51,9 +51,9 @@ def plot():
         var_name = signals[signal][1]
         signal_name = get_signal_name(group_name, var_name)
         group = bd.get_group(group_name)
-        time_value_pair_list = group.vars[var_name]
+        time_value_dict = group.vars[var_name]
 
-        values = get_values_from_pair_list(time_value_pair_list, num_of_time_ticks)
+        values = get_values_from_dict(time_value_dict, num_of_time_ticks)
         
         if signal == 0:
             ax1 = plt.subplot(num_of_signals, 1, signal + 1)
@@ -61,7 +61,7 @@ def plot():
             plt.subplot(num_of_signals, 1, signal + 1, sharex=ax1)
         
         plt.plot(t, values, 'b')
-        for time_index, val in time_value_pair_list:
+        for time_index, val in time_value_dict.items():
             plt.plot(time_index, val, 'ro')
         plt.ylabel(signal_name, rotation = 0)
     
