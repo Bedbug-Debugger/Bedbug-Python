@@ -5,6 +5,12 @@ from .. import (
 )
 
 
+def get_signal_name(groupname, varname):
+    if groupname == const.DEFAULT_GROUP_NAME:
+        return varname
+    return f"{groupname}/{varname}"
+
+
 def plot():
     signals: list[tuple[str, str]] = []
     for groupname in bd._groups.keys():
