@@ -1,6 +1,8 @@
 from .. import const
 
-class time_manager:
+DEFAULT_TIME_MANAGER_NAME = "default_time_manager_name"
+
+class TimeManager:
     
 	def __init__(self, name: str = const.DEFAULT_TIME_MANAGER_NAME):
 		self.name: str = name
@@ -29,4 +31,4 @@ class time_manager:
 		self.tick()
 
 
-time = time_manager()
+time = TimeManager()
