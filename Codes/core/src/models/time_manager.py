@@ -4,7 +4,7 @@ DEFAULT_TIME_MANAGER_NAME = "default_time_manager_name"
 
 class TimeManager:
     
-	def __init__(self, name: str = const.DEFAULT_TIME_MANAGER_NAME):
+	def __init__(self, name: str = DEFAULT_TIME_MANAGER_NAME):
 		self.name: str = name
 		self.current_time: int = 0
 		self.paused: bool = False
