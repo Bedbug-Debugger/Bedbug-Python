@@ -11,7 +11,7 @@ def test_with_default_group_and_one_variable():
         index += 1
         bd.add_data("index", index)
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
-    pyplot_plotting.plot()
+    plot()
 
 
 def test_with_default_group_and_two_vars_and_pause():
