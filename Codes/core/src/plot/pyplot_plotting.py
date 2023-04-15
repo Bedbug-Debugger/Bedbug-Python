@@ -60,7 +60,9 @@ def plot():
         else:
             plt.subplot(num_of_signals, 1, signal + 1, sharex=ax1)
         
-        plt.plot(t, values)
+        plt.plot(t, values, 'b')
+        for time_index, val in time_value_pair_list:
+            plt.plot(time_index, val, 'ro')
         plt.ylabel(signal_name, rotation = 0)
     
     plt.show()
