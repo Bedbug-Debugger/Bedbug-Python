@@ -17,9 +17,8 @@ def test_with_default_group_and_one_variable():
 def test_with_default_group_and_two_vars_and_pause():
     a = 0
     b = 0
-    bd.get_group(const.DEFAULT_GROUP_NAME).add_data({
-        "a": a,
-        "b": b
+    bd.add_data({
+        "a": a
     })
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
     while a < 10:
@@ -29,6 +28,9 @@ def test_with_default_group_and_two_vars_and_pause():
         })
         a += 2
         b += 3
+    while a < 20:
+        bd.add_data("a", a)
+        a += 3
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
     bd.time.pause()
     a = 17
