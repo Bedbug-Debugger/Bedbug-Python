@@ -27,6 +27,7 @@ def get_group(name: str) -> Group:
 def add_data(data_dict: dict) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(data_dict)
 
+
 @add_data.add
 def add_data(label: str, data) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(label, data)
