@@ -9,6 +9,7 @@ from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
 from .models.time_manager import time
+from gui_engines import GuiEngine
 
 _groups: dict[str, Group] = {
     const.DEFAULT_GROUP_NAME: Group(const.DEFAULT_GROUP_NAME)
@@ -71,8 +72,14 @@ def add_data(label: str, data) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data(label, data)
 
 
-def plot() -> None:
-    pass
+def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
+    """
+    Plot all the groups with the selected GUI engine. currently the default and only engine is 'pyplot'
+    :param gui_engine: the selected engine for plotting the data
+    :return: None
+    """
+    if gui_engine == GuiEngine.PyPlot:
+        pass
 
 
 def dump_json(filename: str) -> None:
