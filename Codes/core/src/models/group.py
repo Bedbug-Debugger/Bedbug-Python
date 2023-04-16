@@ -9,7 +9,7 @@ class Group:
 
     def add_data_single(self, label: str, data) -> None:
         if label not in self.vars:
-            self.vars[label] = []
+            self.vars[label] = {}
         self.vars[label][time.current_time] = data
         time.tick()
 
