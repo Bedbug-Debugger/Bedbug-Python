@@ -40,7 +40,8 @@ def create_group(name: str) -> Group:
 def get_group(name: str) -> Group:
     """
     Return an instance of an already created group.
-    :raises GroupNotFoundError: if no group with the given name exists; groups should be created using the create_group function.
+    :raises GroupNotFoundError: if no group with the given name exists;
+    groups should be created using the create_group function.
     :param name: target group name that you want to get
     :return: the created instance of Group class
     """
@@ -73,7 +74,8 @@ def add_data_multi(data_dict: dict) -> None:
 
 def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
     """
-    Plot all logged variables in all groups with the selected GUI engine. Currently the default and only engine is 'pyplot'.
+    Plot all logged variables in all groups with the selected GUI engine.
+    Currently, the default and only engine is 'pyplot'.
     :param gui_engine: the selected engine for plotting the data
     :return: None
     """
