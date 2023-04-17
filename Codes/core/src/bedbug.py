@@ -5,11 +5,12 @@ You should import this file to use the package.
 # TODO: add documentation for fundamental concepts.
 """
 
+from .gui_engines import GuiEngine
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
 from .models.time_manager import time
-from gui_engines import GuiEngine
+from .plot import plot_manager
 
 _groups: dict[str, Group] = {
     const.DEFAULT_GROUP_NAME: Group(const.DEFAULT_GROUP_NAME)
@@ -76,8 +77,7 @@ def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
     :param gui_engine: the selected engine for plotting the data
     :return: None
     """
-    if gui_engine == GuiEngine.PyPlot:
-        pass
+    plot_manager.plot_manager(gui_engine, None)
 
 
 def dump_json(filename: str) -> None:
