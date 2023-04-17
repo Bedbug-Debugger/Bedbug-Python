@@ -3,6 +3,12 @@ from .. import const
 
 
 def get_signal_name(groupname, varname):
+    """
+    Return a "groupname/varname" string based on groupname and varname, or "varname" if the group is the default group.
+    :param groupname: the name of the group
+    :param varname: the name of the variable in the group
+    :return: "groupname/varname"
+    """
     if groupname == const.DEFAULT_GROUP_NAME:
         return varname
     return f"{groupname}/{varname}"
