@@ -45,4 +45,5 @@ def test_with_default_group_and_two_vars_and_pause():
 
 
 def run():
+    # test_with_default_group_and_one_variable()
     test_with_default_group_and_two_vars_and_pause()
