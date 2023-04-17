@@ -61,7 +61,7 @@ def add_data(label: str, data) -> None:
 
 def add_data_multi(data_dict: dict) -> None:
     """
-    Add multiple data with this dict format: {label: var} and store it to the default group.
+    Add multiple data with the dict format {label: var} and store them to the default group.
     This function will pause the sampling time, add all data, and then resume the sampling time;
     so the change of data will be stored and saved in one sample time.
     :param data_dict: a dictionary of variables, with labels as keys and data as values
