@@ -36,13 +36,8 @@ def get_values_from_dict(time_value_dict: dict, num_of_time_ticks: int) -> list:
     return values
 
 
-def plot():
-    signals: list[tuple[str, str]] = []
-    for group_name in bd._groups.keys():
-        for var_name in bd.get_group(group_name).vars.keys():
-            signals.append((group_name, var_name))
+def plot(signals: list[tuple[str, str]]):
     num_of_signals: int = len(signals)
-    
     ax1: plt.Axes = None
     num_of_time_ticks = bd.time.current_time
     t = range(num_of_time_ticks)
