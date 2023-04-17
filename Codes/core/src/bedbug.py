@@ -73,7 +73,7 @@ def add_data_multi(data_dict: dict) -> None:
 
 def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
     """
-    Plot all the groups with the selected GUI engine. Currently the default and only engine is 'pyplot'.
+    Plot all logged variables in all groups with the selected GUI engine. Currently the default and only engine is 'pyplot'.
     :param gui_engine: the selected engine for plotting the data
     :return: None
     """
