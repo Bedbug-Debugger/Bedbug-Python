@@ -4,6 +4,11 @@ from .. import bedbug as bd
 
 
 def plot(signals: list[tuple[str, str]]):
+    """
+    Plot all variables in the input list with pyplot's GUI engine.
+    :param signals: a list of (group name, variable name) pairs
+    :return: None
+    """
     num_of_signals: int = len(signals)
     ax1: plt.Axes = None
     num_of_time_ticks = bd.time.current_time
