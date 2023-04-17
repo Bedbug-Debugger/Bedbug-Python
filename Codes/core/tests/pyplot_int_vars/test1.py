@@ -2,7 +2,6 @@ from ...src import (
     bedbug as bd,
     const
 )
-from ...src.plot.pyplot_plotting import plot
 
 
 def test_with_default_group_and_one_variable():
@@ -11,18 +10,18 @@ def test_with_default_group_and_one_variable():
         index += 1
         bd.add_data("index", index)
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
-    plot()
+    bd.plot()
 
 
 def test_with_default_group_and_two_vars_and_pause():
     a = 0
     b = 0
-    bd.add_data({
+    bd.add_data_multi({
         "a": a
     })
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
     while a < 10:
-        bd.add_data({
+        bd.add_data_multi({
             "a": a,
             "b": b
         })
@@ -42,7 +41,7 @@ def test_with_default_group_and_two_vars_and_pause():
     a = 23
     bd.add_data("a", a)
     print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
-    plot()
+    bd.plot()
 
 
 def run():
