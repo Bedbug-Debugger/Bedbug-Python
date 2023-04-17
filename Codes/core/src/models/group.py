@@ -32,13 +32,5 @@ class Group:
             self.add_data(label, data)
         time.resume()
 
-    # @overload
-    # def add_data(self, data_dict: dict) -> None:
-    #     self.add_data_dict(data_dict)
-    #
-    # @add_data.add
-    # def add_data(self, label: str, data) -> None:
-    #     self.add_data_single(label, data)
-
     def plot(self) -> None:
         pass
