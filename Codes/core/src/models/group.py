@@ -35,4 +35,9 @@ class Group:
         time.resume()
 
     def plot(self, gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
+        """
+        Plot all logged variables in this group with the selected GUI engine. Currently the default and only engine is 'pyplot'.
+        :param gui_engine: the selected engine for plotting the data
+        :return: None
+        """
         plot_manager.plot_manager(gui_engine, self.name)
