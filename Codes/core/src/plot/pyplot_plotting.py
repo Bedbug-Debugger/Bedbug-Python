@@ -1,9 +1,6 @@
 import matplotlib.pyplot as plt
 from . import plot_utility
-from .. import (
-    bedbug as bd,
-    const
-)
+from .. import bedbug as bd
 
 
 def plot(signals: list[tuple[str, str]]):
