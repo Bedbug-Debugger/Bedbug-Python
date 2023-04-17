@@ -2,7 +2,7 @@ from .const import PlotConst
 from .. import const
 
 
-def get_signal_name(groupname, varname):
+def get_signal_name(groupname: str, varname: str) -> str:
     """
     Return a "groupname/varname" string based on groupname and varname, or "varname" if the group is the default group.
     :param groupname: the name of the group
