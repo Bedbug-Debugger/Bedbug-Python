@@ -15,6 +15,12 @@ def get_signal_name(groupname: str, varname: str) -> str:
 
 
 def get_values_from_dict(time_value_dict: dict, num_of_time_ticks: int) -> list:
+    """
+    Return the list of values of a variable in all sampling time ticks, based on the variable's value dictionary.
+    :param time_value_dict: the value dictionary of the variable, in the form of {time_tick: value}
+    :param num_of_time_ticks: the number of time ticks until calling this function
+    :return: list of values of the variable
+    """
     # Initialize values
     values = [PlotConst.EMPTY_VALUE] * num_of_time_ticks
     # Fill registered values
