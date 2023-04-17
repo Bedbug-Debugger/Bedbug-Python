@@ -1,7 +1,8 @@
 """
 The main file of bedbug package.
 
-should import this file to use the package
+You should import this file to use the package.
+# TODO: add documentation for fundamental concepts.
 """
 
 from . import const
@@ -38,7 +39,7 @@ def create_group(name: str) -> Group:
 def get_group(name: str) -> Group:
     """
     Return an instance of an already created group.
-    :raises GroupNotFoundError: if there is not any created group with the name given.
+    :raises GroupNotFoundError: if no group with the given name exists; groups should be created using the create_group function.
     :param name: target group name that you want to get
     :return: the created instance of Group class
     """
@@ -51,8 +52,8 @@ def add_data(label: str, data) -> None:
     """
     Add a single data variable with a label and store it to the default group.
     Each call to this function will increase the sample time by one.
-    :param label: variable label name
-    :param data: value of the variable
+    :param label: the label of the variable
+    :param data: the value of the variable
     :return: None
     """
     get_group(const.DEFAULT_GROUP_NAME).add_data(label, data)
@@ -60,10 +61,10 @@ def add_data(label: str, data) -> None:
 
 def add_data_multi(data_dict: dict) -> None:
     """
-    Add data as a dict with this format: {"label": var} and store it to the default group.
-    This function will pause the sampling time, add all data, then resumes the sampling time;
+    Add multiple data with this dict format: {label: var} and store it to the default group.
+    This function will pause the sampling time, add all data, and then resume the sampling time;
     so the change of data will be stored and saved in one sample time.
-    :param data_dict: is a dictionary of variables which you could add many data at once.
+    :param data_dict: a dictionary of variables, with labels as keys and data as values
     :return: None
     """
     get_group(const.DEFAULT_GROUP_NAME).add_data_multi(data_dict)
