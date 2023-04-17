@@ -42,5 +42,3 @@ def get_values_from_dict(time_value_dict: dict, num_of_time_ticks: int) -> list:
     for time_index in range(first_index_with_value):
         values[time_index] = values[first_index_with_value]
     return values
-
-

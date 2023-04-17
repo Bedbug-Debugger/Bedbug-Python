@@ -2,6 +2,7 @@ from .time_manager import time
 from ..gui_engines import GuiEngine
 from ..plot import plot_manager
 
+
 class Group:
 
     def __init__(self, name: str):

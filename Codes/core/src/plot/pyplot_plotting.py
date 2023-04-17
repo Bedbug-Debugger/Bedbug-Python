@@ -21,15 +21,15 @@ def plot(signals: list[tuple[str, str]]) -> None:
         time_value_dict = group.vars[var_name]
 
         values = plot_utility.get_values_from_dict(time_value_dict, num_of_time_ticks)
-        
+
         if signal == 0:
             ax1 = plt.subplot(num_of_signals, 1, signal + 1)
         else:
             plt.subplot(num_of_signals, 1, signal + 1, sharex=ax1)
-        
+
         plt.plot(t, values, 'b')
         for time_index, val in time_value_dict.items():
             plt.plot(time_index, val, 'ro')
-        plt.ylabel(signal_name, rotation = 0)
-    
+        plt.ylabel(signal_name, rotation=0)
+
     plt.show()
