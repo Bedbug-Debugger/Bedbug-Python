@@ -1,5 +1,6 @@
 from .time_manager import time
-
+from ..gui_engines import GuiEngine
+from ..plot import plot_manager
 
 class Group:
 
@@ -33,5 +34,5 @@ class Group:
             self.add_data(label, data)
         time.resume()
 
-    def plot(self) -> None:
-        pass
+    def plot(self, gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
+        plot_manager.plot_manager(gui_engine, self.name)
