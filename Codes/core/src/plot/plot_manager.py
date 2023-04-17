@@ -6,7 +6,7 @@ def plot_manager(gui_engine: GuiEngine = GuiEngine.PyPlot, plot_group: str = Non
     """
     Plot all variables in plot_group with the selected GUI engine. Currently the default and only engine is 'pyplot'.
     :param gui_engine: the selected engine for plotting the data
-    :paran plot_group: the name of the group for plotting its variables, or None for plotting all variables. The default value is None.
+    :param plot_group: the name of the group for plotting its variables, or None for plotting all variables. The default value is None.
     :return: None
     """
     signals: list[tuple[str, str]] = []
