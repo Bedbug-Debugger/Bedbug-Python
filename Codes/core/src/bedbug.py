@@ -4,7 +4,6 @@ The main file of bedbug package.
 should import this file to use the package
 """
 
-from overload import overload
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
@@ -48,19 +47,6 @@ def get_group(name: str) -> Group:
     return _groups[name]
 
 
-@overload
-def add_data(data_dict: dict) -> None:
-    """
-    Add data as a dict with this format: {"label": var} and store it to the default group.
-    This function will pause the sampling time, add all data, then resumes the sampling time;
-    so the change of data will be stored and saved in one sample time.
-    :param data_dict: is a dictionary of variables which you could add many data at once.
-    :return: None
-    """
-    get_group(const.DEFAULT_GROUP_NAME).add_data(data_dict)
-
-
-@add_data.add
 def add_data(label: str, data) -> None:
     """
     Add a single data variable with a label and store it to the default group.
@@ -70,6 +56,17 @@ def add_data(label: str, data) -> None:
     :return: None
     """
     get_group(const.DEFAULT_GROUP_NAME).add_data(label, data)
+
+
+def add_data_multi(data_dict: dict) -> None:
+    """
+    Add data as a dict with this format: {"label": var} and store it to the default group.
+    This function will pause the sampling time, add all data, then resumes the sampling time;
+    so the change of data will be stored and saved in one sample time.
+    :param data_dict: is a dictionary of variables which you could add many data at once.
+    :return: None
+    """
+    get_group(const.DEFAULT_GROUP_NAME).add_data_multi(data_dict)
 
 
 def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
