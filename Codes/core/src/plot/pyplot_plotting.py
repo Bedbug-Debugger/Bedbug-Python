@@ -3,7 +3,7 @@ from . import plot_utility
 from .. import bedbug as bd
 
 
-def plot(signals: list[tuple[str, str]]):
+def plot(signals: list[tuple[str, str]]) -> None:
     """
     Plot all variables in the input list with pyplot's GUI engine.
     :param signals: a list of (group name, variable name) pairs
