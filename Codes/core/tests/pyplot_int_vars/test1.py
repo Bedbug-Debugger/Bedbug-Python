@@ -44,6 +44,18 @@ def test_with_default_group_and_two_vars_and_pause():
     bd.plot()
 
 
+def test_with_multiple_groups_and_multiple_vars():
+    a, b, c = 1, 2, 3
+    G1 = bd.create_group("G1")
+    G1.add_data("a", a)
+    G2 = bd.create_group("G2")
+    G2.add_data("b", b)
+    G3 = bd.create_group("G3")
+    G3.add_data("c", c)
+    bd.plot()
+    G2.plot()
+
 def run():
     # test_with_default_group_and_one_variable()
-    test_with_default_group_and_two_vars_and_pause()
+    # test_with_default_group_and_two_vars_and_pause()
+    test_with_multiple_groups_and_multiple_vars()
