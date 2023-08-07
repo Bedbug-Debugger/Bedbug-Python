@@ -56,6 +56,6 @@ def test_with_multiple_groups_and_multiple_vars():
     G2.plot()
 
 def run():
-    # test_with_default_group_and_one_variable()
+    test_with_default_group_and_one_variable()
     # test_with_default_group_and_two_vars_and_pause()
-    test_with_multiple_groups_and_multiple_vars()
+    # test_with_multiple_groups_and_multiple_vars()
