@@ -1,7 +1,32 @@
+from typing import Union
+
 import matplotlib.pyplot as plt
+import numpy as np
+
 from . import plot_utility
 from .. import bedbug as bd
 
+
+def get_axes(axs: Union[plt.Axes, np.ndarray], num_of_signals: int, signal_num: int) -> plt.Axes:
+    if num_of_signals == 1:
+        return axs
+    return axs[signal_num]
+
+def plot_single_signal(ax: plt.Axes, time_ticks: list, signal_name: str, time_value_dict: dict):
+    time_list = []
+    value_list = []
+    # Add relevant (time_tick, value) points to time_list and value_list for plotting
+    for time_tick in time_ticks:
+        if time_tick in time_value_dict:
+            value = time_value_dict[time_tick]
+            time_list.append(time_tick)
+            value_list.append(value)
+    # Add sentinel element to time_list and value_list, needed for the tail of the plot
+    time_list.append(time_ticks[-1] + 1)    # time_ticks is referred to, so that all plots end in the same time tick
+    value_list.append(value_list[-1])
+    ax.step(time_list, value_list, 'b', where='post')
+    ax.plot(time_list[:-1], value_list[:-1], 'bo')
+    ax.set_ylabel(signal_name + 4*' ', rotation='horizontal')
 
 def plot(signals: list[tuple[str, str]]) -> None:
     """
