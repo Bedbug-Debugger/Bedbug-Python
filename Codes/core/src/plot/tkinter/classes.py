@@ -38,7 +38,7 @@ class TkFrame:
 		for handled_event in handled_events:
 			self.tk_element.bind(handled_event, self.handle_event)
 	
-	def handle_event(self):
+	def handle_event(self, event):
 		pass
 
 
