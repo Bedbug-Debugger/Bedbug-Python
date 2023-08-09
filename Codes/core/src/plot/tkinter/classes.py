@@ -4,11 +4,11 @@ import tkinter as tk
 
 class TkPlotterWindow:
     
-	def __init__(self, name: str):
+	def __init__(self, name: str, signals: list[tuple[str, str]]):
 		self.name: str = name
 		self.tk_element = tk.Tk()
 		# Variables
-		self.num_of_signals: int = None
+		self.num_of_signals: int = len(signals)
 		# Subwidgets
 		self.signal_name_frame = TkFrame(name='signal_name_frame', master=self.tk_element)
 		self.signal_plot_frame = TkPlotFrame(name='signal_plot_frame', master=self.tk_element)
