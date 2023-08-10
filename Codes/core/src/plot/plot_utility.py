@@ -1,4 +1,3 @@
-from .const import PlotConst
 from .. import const
 from .. import bedbug as bd
 
