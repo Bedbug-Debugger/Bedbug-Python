@@ -9,7 +9,7 @@ def test_with_default_group_and_one_variable():
     while index <= 10:
         index += 1
         bd.add_data("index", index)
-    print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    print(bd.get_group(const.DEFAULT_GROUP_NAME).signals)
     bd.plot()
 
 
@@ -19,7 +19,7 @@ def test_with_default_group_and_two_vars_and_pause():
     bd.add_data_multi({
         "a": a
     })
-    print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    print(bd.get_group(const.DEFAULT_GROUP_NAME).signals)
     while a < 10:
         bd.add_data_multi({
             "a": a,
@@ -30,17 +30,17 @@ def test_with_default_group_and_two_vars_and_pause():
     while a < 20:
         bd.add_data("a", a)
         a += 3
-    print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    print(bd.get_group(const.DEFAULT_GROUP_NAME).signals)
     bd.time.pause()
     a = 17
     bd.add_data("a", a)
     b = 19
     bd.add_data("b", b)
     bd.time.resume()
-    print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    print(bd.get_group(const.DEFAULT_GROUP_NAME).signals)
     a = 23
     bd.add_data("a", a)
-    print(bd.get_group(const.DEFAULT_GROUP_NAME).vars)
+    print(bd.get_group(const.DEFAULT_GROUP_NAME).signals)
     bd.plot()
 
 
