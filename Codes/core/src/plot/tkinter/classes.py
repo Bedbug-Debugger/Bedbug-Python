@@ -151,6 +151,9 @@ class TkPlotFrame(TkFrame):
 		)
 		self.tk_element.grid(row=0, column=1)
 
+	def write_data(self, *, line, col_st, col_en):
+		pass
+
 
 
 TK_GUI: TkPlotterWindow = None
