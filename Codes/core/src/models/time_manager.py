@@ -3,9 +3,15 @@ from .. import const
 DEFAULT_TIME_MANAGER_NAME = "default_time_manager_name"
 
 
+class TimeTick:
+
+    def __init__(self, time: int, tick_name: str = None) -> None:
+        self.time: int = time
+        self.tick_name: str = tick_name
+
 class TimeManager:
 
-    def __init__(self, name: str = DEFAULT_TIME_MANAGER_NAME):
+    def __init__(self, name: str = DEFAULT_TIME_MANAGER_NAME) -> None:
         self.name: str = name
         self.current_time: int = 0
         self.paused: bool = False
@@ -31,5 +37,11 @@ class TimeManager:
         #	bd.add_data("a", a)		# adds (1, a) since current_time is 1, then lets current_time = 2
         self.tick()
 
+
+time_ticks_dict: dict[int, TimeTick] = {}
+
+def add_new_time_tick(time: int, tick_name: str = None):
+    new_time_tick = TimeTick(time, tick_name)
+    time_ticks_dict[time] = new_time_tick
 
 time = TimeManager()
