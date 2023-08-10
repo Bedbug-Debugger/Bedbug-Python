@@ -78,7 +78,7 @@ class TkNameFrame(TkFrame):
 		# Define tk element
 		self.define_tk_element()
 		# Subwidgets
-		self.signal_lines: list[tk.Frame] = [None] * self.num_of_lines
+		self.signal_lines: list[tk.Label] = [None] * self.num_of_lines
 		for signal_num in range(self.num_of_lines):
 			self.signal_lines[signal_num] = tk.Label(
 				master=self.tk_element,
@@ -125,7 +125,7 @@ class TkPlotFrame(TkFrame):
 		# Define tk element
 		self.define_tk_element()
 		# Subwidgets
-		self.signal_lines: list[tk.Frame] = [None] * self.num_of_lines
+		self.signal_lines: list[tk.Label] = [None] * self.num_of_lines
 		for signal_num in range(self.num_of_lines):
 			self.signal_lines[signal_num] = tk.Label(
 				master=self.tk_element,
