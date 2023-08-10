@@ -2,11 +2,20 @@ from __future__ import annotations
 import tkinter as tk
 
 class TkPlotterWindow:
-    
+	"""
+	Wrapper class for managing the main tk.Tk window.
+	"""
 	num_of_lines: int = 8
 	num_of_plot_columns: int = 30
 
 	def __init__(self, name: str, signals: list[tuple[str, str]]):
+		"""
+		Initialize a TkPlotterWindow object.
+		:param name: A string for identifying this object.
+		:type name: str
+		:param signals: List of signals to plot.
+		:type signals: list[tuple[str, str]]
+		"""
 		self.name: str = name
 		self.tk_element = tk.Tk()
 		# Variables
@@ -28,17 +37,33 @@ class TkPlotterWindow:
 		self.tk_element.bind('<Key-Up>', self.handle_event)
 		self.tk_element.bind('<Key-Down>', self.handle_event)
 
-	def handle_event(self, event):
+	def handle_event(self, event: tk.Event) -> None:
+		"""
+		Handle a given event.
+		:param event: tk event name.
+		:type event: tk.Event
+		"""
 		pass
 
 class TkFrame:
-
+	"""
+	Base class for managing tk.Frame widgets.
+	"""
 	def __init__(
 			self,
 			name: str,
 			master: TkFrame | TkPlotterWindow,
 			handled_events: list[str] = []
 	):
+		"""
+
+		:param name: A string for identifying this object.
+		:type name: str
+		:param master: The tk master to connect the underlying tk.Frame to.
+		:type master: TkFrame | TkPlotterWindow
+		:param handled_events: List of events to handle as a list of tk event names, defaults to []
+		:type handled_events: list[str], optional
+		"""
 		self.name: str = name
 		self.master: TkFrame | TkPlotterWindow = master
 		self.tk_element: tk.Frame = None
@@ -47,25 +72,48 @@ class TkFrame:
 		# Define tk element
 		self.define_tk_element()
 		
-	def define_tk_element(self):
+	def define_tk_element(self) -> None:
+		"""
+		Define the Frame widget which this class relies on. Base function to inherit.
+		"""
 		self.tk_element = tk.Frame(
 			master=self.master
 		)
 		self.tk_element.pack()
 
-	def handle_event(self, event):
+	def handle_event(self, event: tk.Event) -> None:
+		"""
+		Handle a given event. Base function to inherit.
+		:param event: tk event name.
+		:type event: tk.Event
+		"""
 		pass
 
 class TkNameFrame(TkFrame):
-	
+	"""
+	Wrapper class for the signal name frame. This class inherits from TkFrame.
+	"""	
 	def __init__(
 			self,
 	    	name: str,
 			master: TkPlotterWindow,
 			signals: list[tuple[str, str]],
-			num_of_lines: float = TkPlotterWindow.num_of_lines,
+			num_of_lines: int = TkPlotterWindow.num_of_lines,
 	    	handled_events: list[str] = []
 	):
+		"""
+		Initialize a TkNameFrame object.
+		:param name: A string for identifying this object.
+		:type name: str
+		:param master: The tk master to connect the underlying tk.Frame to.
+		:type master: TkPlotterWindow
+		:param signals: List of signals to plot.
+		:type signals: list[tuple[str, str]]
+		:param num_of_lines: Number of lines to display, defaults to TkPlotterWindow.num_of_lines
+		:type num_of_lines: int, optional
+		:param handled_events: List of events to handle as a list of tk event names, defaults to []
+		:type handled_events: list[str], optional
+		"""
 		self.name: str = name
 		self.master: TkPlotterWindow = master
 		self.tk_element: tk.Frame = None
@@ -94,7 +142,10 @@ class TkNameFrame(TkFrame):
 			self.tk_element.bind(handled_event, self.handle_event)
 
 	
-	def define_tk_element(self):
+	def define_tk_element(self) -> None:
+		"""
+		Define the Frame widget which this class relies on.
+		"""
 		self.tk_element = tk.Frame(
 			master=self.master
 			# bg=self.bg
@@ -104,7 +155,9 @@ class TkNameFrame(TkFrame):
 		self.tk_element.grid(row=0, column=0)
 
 class TkPlotFrame(TkFrame):
-	
+	"""
+	Wrapper class for the plot frame. This class inherits from TkFrame.
+	"""
 	def __init__(
 			self,
 	    	name: str,
@@ -114,6 +167,21 @@ class TkPlotFrame(TkFrame):
 			num_of_columns: int = TkPlotterWindow.num_of_plot_columns,
 	    	handled_events: list[str] = []
 	):
+		"""
+		Initialize a TkPlotFrame object.
+		:param name: A string for identifying this object.
+		:type name: str
+		:param master: The tk master to connect the underlying tk.Frame to.
+		:type master: TkPlotterWindow
+		:param signals: List of signals to plot.
+		:type signals: list[tuple[str, str]]
+		:param num_of_lines: Number of lines to display, defaults to TkPlotterWindow.num_of_lines
+		:type num_of_lines: int, optional
+		:param num_of_columns: Number of plot columns to display, defaults to TkPlotterWindow.num_of_plot_columns
+		:type num_of_columns: int, optional
+		:param handled_events: List of events to handle as a list of tk event names, defaults to []
+		:type handled_events: list[str], optional
+		"""
 		self.name: str = name
 		self.master: TkPlotterWindow = master
 		self.tk_element: tk.Frame = None
@@ -145,13 +213,26 @@ class TkPlotFrame(TkFrame):
 			self.tk_element.bind(handled_event, self.handle_event)
 
 	
-	def define_tk_element(self):
+	def define_tk_element(self) -> None:
+		"""
+		Define the Frame widget which this class relies on.
+		"""
 		self.tk_element = tk.Frame(
 			master=self.master
 		)
 		self.tk_element.grid(row=0, column=1)
 
-	def write_data(self, *, line, col_st, col_en):
+	def write_data(self, *, line: int, col_st: int = None, col_en: int = None) -> None:
+		"""
+		Write signal data in the plot frame.
+		Writes in [col_st, col_en). Setting any of them to None lets the function truncate data in the plot value slot.
+		:param line: Line number.
+		:type line: int
+		:param col_st: Column number to start, defaults to None
+		:type col_st: int, optional
+		:param col_en: Column number to end before, defaults to None
+		:type col_en: int, optional
+		"""
 		pass
 
 
