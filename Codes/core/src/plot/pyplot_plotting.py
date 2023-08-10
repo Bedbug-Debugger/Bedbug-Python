@@ -44,10 +44,10 @@ def plot(signals: list[tuple[str, str]]) -> None:
         signal_name = plot_utility.get_signal_name(group_name, var_name)
         group = bd.get_group(group_name)
         time_value_dict = group.vars[var_name]
-        this_ax = plot_utility.get_axes(axs, num_of_signals, signal_num)
-        plot_utility.plot_single_signal(this_ax, time_ticks, signal_name, time_value_dict)
+        this_ax = get_axes(axs, num_of_signals, signal_num)
+        plot_single_signal(this_ax, time_ticks, signal_name, time_value_dict)
     # Set time axis values
-    last_ax = plot_utility.get_axes(axs, num_of_signals, num_of_signals-1)
+    last_ax = get_axes(axs, num_of_signals, num_of_signals-1)
     last_ax.set_xticks(time_ticks)
     plt.show()
 
