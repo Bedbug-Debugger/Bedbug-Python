@@ -1,6 +1,9 @@
 from __future__ import annotations
 import tkinter as tk
 
+from ...models.group import GroupSignalPair
+from ...models.time_manager import TimeTick
+
 class TkPlotterWindow:
 	"""
 	Wrapper class for managing the main tk.Tk window.
@@ -8,18 +11,18 @@ class TkPlotterWindow:
 	num_of_lines: int = 8
 	num_of_plot_columns: int = 30
 
-	def __init__(self, name: str, signals: list[tuple[str, str]]):
+	def __init__(self, name: str, signals: list[GroupSignalPair]) -> None:
 		"""
 		Initialize a TkPlotterWindow object.
 		:param name: A string for identifying this object.
 		:type name: str
 		:param signals: List of signals to plot.
-		:type signals: list[tuple[str, str]]
+		:type signals: list[GroupSignalPair]
 		"""
 		self.name: str = name
 		self.tk_element = tk.Tk()
 		# Variables
-		self.signals: list[tuple[str, str]] = signals
+		self.signals: list[GroupSignalPair] = signals
 		# Subwidgets
 		self.signal_name_frame = TkNameFrame(
 			name='signal_name_frame',
@@ -54,7 +57,7 @@ class TkFrame:
 			name: str,
 			master: TkFrame | TkPlotterWindow,
 			handled_events: list[str] = []
-	):
+	) -> None:
 		"""
 
 		:param name: A string for identifying this object.
@@ -97,10 +100,10 @@ class TkNameFrame(TkFrame):
 			self,
 	    	name: str,
 			master: TkPlotterWindow,
-			signals: list[tuple[str, str]],
+			signals: list[GroupSignalPair],
 			num_of_lines: int = TkPlotterWindow.num_of_lines,
 	    	handled_events: list[str] = []
-	):
+	) -> None:
 		"""
 		Initialize a TkNameFrame object.
 		:param name: A string for identifying this object.
@@ -108,7 +111,7 @@ class TkNameFrame(TkFrame):
 		:param master: The tk master to connect the underlying tk.Frame to.
 		:type master: TkPlotterWindow
 		:param signals: List of signals to plot.
-		:type signals: list[tuple[str, str]]
+		:type signals: list[GroupSignalPair]
 		:param num_of_lines: Number of lines to display, defaults to TkPlotterWindow.num_of_lines
 		:type num_of_lines: int, optional
 		:param handled_events: List of events to handle as a list of tk event names, defaults to []
@@ -118,9 +121,9 @@ class TkNameFrame(TkFrame):
 		self.master: TkPlotterWindow = master
 		self.tk_element: tk.Frame = None
 		# Variables
-		self.signals: signals
+		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(signals)
-		self.num_of_lines: float = num_of_lines
+		self.num_of_lines: int = num_of_lines
 		self.bg: str = '#EEEEEE'
 		self.fg: str = '#000000'
 		self.font: str = 'Courier'
@@ -162,11 +165,11 @@ class TkPlotFrame(TkFrame):
 			self,
 	    	name: str,
 			master: TkPlotterWindow,
-			signals: list[tuple[str, str]],
+			signals: list[GroupSignalPair],
 			num_of_lines: int = TkPlotterWindow.num_of_lines,
 			num_of_columns: int = TkPlotterWindow.num_of_plot_columns,
 	    	handled_events: list[str] = []
-	):
+	) -> None:
 		"""
 		Initialize a TkPlotFrame object.
 		:param name: A string for identifying this object.
@@ -174,7 +177,7 @@ class TkPlotFrame(TkFrame):
 		:param master: The tk master to connect the underlying tk.Frame to.
 		:type master: TkPlotterWindow
 		:param signals: List of signals to plot.
-		:type signals: list[tuple[str, str]]
+		:type signals: list[GroupSignalPair]
 		:param num_of_lines: Number of lines to display, defaults to TkPlotterWindow.num_of_lines
 		:type num_of_lines: int, optional
 		:param num_of_columns: Number of plot columns to display, defaults to TkPlotterWindow.num_of_plot_columns
@@ -186,13 +189,14 @@ class TkPlotFrame(TkFrame):
 		self.master: TkPlotterWindow = master
 		self.tk_element: tk.Frame = None
 		# Variables
-		self.signals: signals
+		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(signals)
 		self.num_of_lines: int = num_of_lines
 		self.num_of_columns: int = num_of_columns
 		self.bg: str = '#003366'
 		self.fg: str = '#ffffff'
 		self.font: str = 'Courier'
+		self.time_ticks: list[TimeTick] = None
 		# Define tk element
 		self.define_tk_element()
 		# Subwidgets
