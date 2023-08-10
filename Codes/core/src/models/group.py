@@ -35,7 +35,7 @@ class Group:
             self.add_data(label, data)
         time.resume()
 
-    def plot(self, gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
+    def plot(self, gui_engine: GuiEngine = GuiEngine.default) -> None:
         """
         Plot all logged variables in this group with the selected GUI engine. Currently the default and only engine is 'pyplot'.
         :param gui_engine: the selected engine for plotting the data

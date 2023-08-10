@@ -1,9 +1,12 @@
-from . import pyplot_plotting
+from . import (
+    pyplot_plotting,
+    tkinter_plotting
+)
 from ..gui_engines import GuiEngine
 from .. import bedbug as bd
 
 
-def plot_manager(gui_engine: GuiEngine = GuiEngine.PyPlot, plot_group: str = None) -> None:
+def plot_manager(gui_engine: GuiEngine = GuiEngine.default, plot_group: str = None) -> None:
     """
     Plot all variables in plot_group with the selected GUI engine.
     Currently, the default and only engine is 'pyplot'.
@@ -23,6 +26,8 @@ def plot_manager(gui_engine: GuiEngine = GuiEngine.PyPlot, plot_group: str = Non
 
     if gui_engine == GuiEngine.PyPlot:
         pyplot_plotting.plot(signals)
+    elif gui_engine == GuiEngine.tkinter:
+        tkinter_plotting.plot(signals)
     else:
         # TODO
         pass

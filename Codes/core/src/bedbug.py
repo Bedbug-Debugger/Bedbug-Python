@@ -72,7 +72,7 @@ def add_data_multi(data_dict: dict) -> None:
     get_group(const.DEFAULT_GROUP_NAME).add_data_multi(data_dict)
 
 
-def plot(gui_engine: GuiEngine = GuiEngine.PyPlot) -> None:
+def plot(gui_engine: GuiEngine = GuiEngine.default) -> None:
     """
     Plot all logged variables in all groups with the selected GUI engine.
     Currently, the default and only engine is 'pyplot'.
