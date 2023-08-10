@@ -4,11 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from . import plot_utility
-from ..models.group import (
+from ..models.wrappers import (
     GroupSignalPair,
-    SignalRecord
+    SignalRecord,
+    SignalValue,
+    TimeTick
 )
-from ..models.time_manager import TimeTick
 from .. import bedbug as bd
 
 
@@ -18,16 +19,16 @@ def get_axes(axs: Union[plt.Axes, np.ndarray], num_of_signals: int, signal_num: 
     return axs[signal_num]
 
 def plot_single_signal(ax: plt.Axes, time_ticks: list[TimeTick], signal_label: str, signal_record: SignalRecord):
-    time_list = []
-    value_list = []
+    time_list: list[int] = []
+    value_list: list[float] = []
     # Add relevant (time_tick, value) points to time_list and value_list for plotting
     for time_tick in time_ticks:
         if time_tick in signal_record:
             value = signal_record[time_tick]
-            time_list.append(time_tick)
-            value_list.append(value)
+            time_list.append(time_tick.time)
+            value_list.append(float(value.value))
     # Add sentinel element to time_list and value_list, needed for the tail of the plot
-    time_list.append(time_ticks[-1] + 1)    # time_ticks is referred to, so that all plots end in the same time tick
+    time_list.append(time_ticks[-1].time + 1)    # time_ticks is referred to, so that all plots end in the same time tick
     value_list.append(value_list[-1])
     ax.step(time_list, value_list, 'b', where='post')
     ax.plot(time_list[:-1], value_list[:-1], 'bo')
@@ -48,7 +49,7 @@ def plot(signals: list[GroupSignalPair]) -> None:
         group_name = signal.group_name
         signal_label = signal.signal_label
         signal_full_label = plot_utility.get_signal_full_label(group_name, signal_label)
-        group = bd.get_group(group_name)
+        group = bd.get_group(group_name.name)
         signal_record = group.signals[signal_label]
         this_ax = get_axes(axs, num_of_signals, signal_num)
         plot_single_signal(this_ax, time_ticks, signal_full_label, signal_record)

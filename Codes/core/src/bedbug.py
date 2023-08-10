@@ -8,10 +8,8 @@ You should import this file to use the package.
 from .gui_engines import GuiEngine
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
-from .models.group import (
-    Group,
-    GroupName
-)
+from .models.group import Group
+from .models.wrappers import GroupName
 from .models.time_manager import time
 from .plot import plot_manager
 
@@ -51,7 +49,7 @@ def get_group(name: str) -> Group:
     """
     group_name = GroupName(name)
     if group_name not in _groups:
-        raise GroupNotFoundError
+        raise GroupNotFoundError(name)
     return _groups[group_name]
 
 
@@ -92,7 +90,7 @@ def plot(gui_engine: GuiEngine = GuiEngine.default) -> None:
     :param gui_engine: the selected engine for plotting the data
     :return: None
     """
-    plot_manager.plot_manager(gui_engine, None)
+    plot_manager.plot_manager(gui_engine)
 
 
 def dump_json(filename: str) -> None:

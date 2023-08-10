@@ -6,41 +6,16 @@ from .time_manager import (
     time,
     add_new_time_tick
 )
-from .signal import (
+from .wrappers import (
     SignalLabel,
     SignalValue,
-    SignalRecord
+    SignalRecord,
+    GroupName,
+    GroupSignalPair
 )
 from ..gui_engines import GuiEngine
 from ..plot import plot_manager
 
-
-class GroupName:
-	"""
-	A wrapper class for group names.
-	"""
-	def __init__(self, name: str) -> None:
-		"""
-		Initialize with a label.
-		:param label: Signal label
-		:type label: str
-		"""
-		self.name: str = name
-
-class GroupSignalPair:
-    """
-    A wrapper class for (group name, signal label).
-    """
-    def __init__(self, group_name: GroupName, signal_label: SignalLabel) -> None:
-        """
-        Initialize with group_name and signal_label.
-        :param group_name: Group name
-        :type group_name: GroupName
-        :param signal_label: Signal label
-        :type signal_label: SignalLabel
-        """
-        self.group_name: GroupName = group_name
-        self.signal_label: SignalLabel = signal_label
 
 class Group:
 
@@ -63,10 +38,10 @@ class Group:
         signal_label = SignalLabel(label)
         signal_value = SignalValue(data)
         if signal_label not in self.signals:
-            self.signals[signal_label] = {}
+            self.signals[signal_label] = SignalRecord()
         current_time = time.current_time
         new_time_tick = add_new_time_tick(current_time, tick_name)
-        self.signals[label][new_time_tick] = signal_value
+        self.signals[signal_label][new_time_tick] = signal_value
         time.tick()
 
     def add_data_multi(self, data_dict: dict, *, tick_name: str = None) -> None:
@@ -92,4 +67,4 @@ class Group:
         :param gui_engine: the selected engine for plotting the data
         :return: None
         """
-        plot_manager.plot_manager(gui_engine, self.name)
+        plot_manager.plot_manager(gui_engine, self.name.name)

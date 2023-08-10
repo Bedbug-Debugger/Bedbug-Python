@@ -1,10 +1,10 @@
 from ..models.group import (
     SignalLabel,
     GroupName,
-    GroupSignalPair
+    GroupSignalPair,
+    TimeTick
 )
 from .. import const
-from ..models.time_manager import TimeTick
 from .. import bedbug as bd
 
 
@@ -34,7 +34,7 @@ def get_time_ticks(signals: list[GroupSignalPair]) -> list[TimeTick]:
     for signal in signals:
         group_name = signal.group_name
         signal_name = signal.signal_label
-        group = bd.get_group(group_name)
+        group = bd.get_group(group_name.name)
         time_value_dict = group.signals[signal_name]
         for time_tick in time_value_dict:
             time_ticks.add(time_tick)

@@ -1,17 +1,12 @@
 from __future__ import annotations
+
+from .wrappers import (
+    TimeTick
+)
 from .. import const
 
 DEFAULT_TIME_MANAGER_NAME = "default_time_manager_name"
 
-
-class TimeTick:
-
-    def __init__(self, time: int, tick_name: str = None) -> None:
-        self.time: int = time
-        self.tick_name: str = tick_name
-
-    def __lt__(self, other: TimeTick) -> bool:
-        return self.time < other.time
 
 class TimeManager:
 

@@ -1,8 +1,10 @@
 from __future__ import annotations
 import tkinter as tk
 
-from ...models.group import GroupSignalPair
-from ...models.time_manager import TimeTick
+from ...models.wrappers import (
+    GroupSignalPair,
+    TimeTick
+)
 
 class TkPlotterWindow:
 	"""
