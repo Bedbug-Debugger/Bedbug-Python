@@ -2,10 +2,7 @@ from __future__ import annotations
 from typing import (
     Any, Iterator
 )
-from dataclasses import (
-    dataclass,
-    field
-)
+from dataclasses import dataclass
 
 
 @dataclass(eq=True, frozen=True, order=True)
