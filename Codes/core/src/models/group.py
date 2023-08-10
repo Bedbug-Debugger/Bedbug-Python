@@ -2,7 +2,7 @@ from typing import Any
 
 from .time_manager import (
     TimeTick,
-    time_ticks_dict,
+    time_ticks_from_time,
     time,
     add_new_time_tick
 )

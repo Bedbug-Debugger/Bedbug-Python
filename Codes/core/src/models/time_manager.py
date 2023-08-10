@@ -37,11 +37,11 @@ class TimeManager:
         self.tick()
 
 
-time_ticks_dict: dict[int, TimeTick] = {}
+time_ticks_from_time: dict[int, TimeTick] = {}
 
 def add_new_time_tick(time: int, tick_name: str = None) -> TimeTick:
     new_time_tick = TimeTick(time, tick_name)
-    time_ticks_dict[time] = new_time_tick
+    time_ticks_from_time[time] = new_time_tick
     return new_time_tick
 
 time = TimeManager()
