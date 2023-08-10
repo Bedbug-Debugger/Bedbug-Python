@@ -50,26 +50,34 @@ def get_group(name: str) -> Group:
     return _groups[name]
 
 
-def add_data(label: str, data) -> None:
+def add_data(label: str, data, *, tick_name: str = None) -> None:
     """
     Add a single data variable with a label and store it to the default group.
     Each call to this function will increase the sample time by one.
-    :param label: the label of the variable
-    :param data: the value of the variable
-    :return: None
+    A new TimeTick object is created for this time sample.
+    If time is manually paused, the new TimeTick object overwrites the previous TimeTick for time.current_time.
+    :param label: Label of the variable.
+    :type label: str
+    :param data: Value of the variable.
+    :param tick_name: Name parameter of corresponding TimeTick object, defaults to None
+    :type tick_name: str, optional
     """
-    get_group(const.DEFAULT_GROUP_NAME).add_data(label, data)
+    get_group(const.DEFAULT_GROUP_NAME).add_data(label, data, tick_name=tick_name)
 
 
-def add_data_multi(data_dict: dict) -> None:
+def add_data_multi(data_dict: dict, *, tick_name: str = None) -> None:
     """
     Add multiple data with the dict format {label: var} and store them to the default group.
     This function will pause the sampling time, add all data, and then resume the sampling time;
     so the change of data will be stored and saved in one sample time.
-    :param data_dict: a dictionary of variables, with labels as keys and data as values
-    :return: None
+    A new TimeTick object is created for this time sample.
+    If time is manually paused, the new TimeTick object overwrites the previous TimeTick for time.current_time.
+    :param data_dict: Dictionary of variables, with labels as keys and data as values.
+    :type data_dict: dict
+    :param tick_name: Name parameter of corresponding TimeTick object, defaults to None
+    :type tick_name: str, optional
     """
-    get_group(const.DEFAULT_GROUP_NAME).add_data_multi(data_dict)
+    get_group(const.DEFAULT_GROUP_NAME).add_data_multi(data_dict, tick_name=tick_name)
 
 
 def plot(gui_engine: GuiEngine = GuiEngine.default) -> None:
