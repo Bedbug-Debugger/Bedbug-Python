@@ -1,3 +1,4 @@
+from __future__ import annotations
 from .. import const
 
 DEFAULT_TIME_MANAGER_NAME = "default_time_manager_name"
@@ -8,6 +9,9 @@ class TimeTick:
     def __init__(self, time: int, tick_name: str = None) -> None:
         self.time: int = time
         self.tick_name: str = tick_name
+
+    def __lt__(self, other: TimeTick) -> bool:
+        return self.time < other.time
 
 class TimeManager:
 
@@ -40,8 +44,9 @@ class TimeManager:
 
 time_ticks_dict: dict[int, TimeTick] = {}
 
-def add_new_time_tick(time: int, tick_name: str = None):
+def add_new_time_tick(time: int, tick_name: str = None) -> TimeTick:
     new_time_tick = TimeTick(time, tick_name)
     time_ticks_dict[time] = new_time_tick
+    return new_time_tick
 
 time = TimeManager()

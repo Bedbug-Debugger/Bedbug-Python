@@ -2,11 +2,15 @@ from . import (
     pyplot_plotting,
     tkinter_plotting
 )
+from ..models.group import (
+    GroupName,
+    GroupSignalPair
+)
 from ..gui_engines import GuiEngine
 from .. import bedbug as bd
 
 
-def plot_manager(gui_engine: GuiEngine = GuiEngine.default, plot_group: str = None) -> None:
+def plot_manager(gui_engine: GuiEngine = GuiEngine.default, plot_group: GroupName = None) -> None:
     """
     Plot all variables in plot_group with the selected GUI engine.
     Currently, the default and only engine is 'pyplot'.
@@ -15,14 +19,14 @@ def plot_manager(gui_engine: GuiEngine = GuiEngine.default, plot_group: str = No
     The default value is None.
     :return: None
     """
-    signals: list[tuple[str, str]] = []
+    signals: list[GroupSignalPair] = []
     if plot_group == None:
-        for group_name in bd._groups.keys():
-            for var_name in bd.get_group(group_name).vars.keys():
-                signals.append((group_name, var_name))
+        for group_name in bd._groups:
+            for signal_name in bd.get_group(group_name).signals:
+                signals.append(GroupSignalPair(group_name, signal_name))
     else:
-        for var_name in bd.get_group(plot_group).vars.keys():
-            signals.append((plot_group, var_name))
+        for signal_name in bd.get_group(plot_group).signals:
+            signals.append(GroupSignalPair(plot_group, signal_name))
 
     if gui_engine == GuiEngine.PyPlot:
         pyplot_plotting.plot(signals)

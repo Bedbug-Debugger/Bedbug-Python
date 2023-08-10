@@ -1,20 +1,54 @@
+from typing import Any
+
 from .time_manager import (
     TimeTick,
     time_ticks_dict,
     time,
     add_new_time_tick
 )
+from .signal import (
+    SignalLabel,
+    SignalValue,
+    SignalRecord
+)
 from ..gui_engines import GuiEngine
 from ..plot import plot_manager
 
 
+class GroupName:
+	"""
+	A wrapper class for group names.
+	"""
+	def __init__(self, name: str) -> None:
+		"""
+		Initialize with a label.
+		:param label: Signal label
+		:type label: str
+		"""
+		self.name: str = name
+
+class GroupSignalPair:
+    """
+    A wrapper class for (group name, signal label).
+    """
+    def __init__(self, group_name: GroupName, signal_label: SignalLabel) -> None:
+        """
+        Initialize with group_name and signal_label.
+        :param group_name: Group name
+        :type group_name: GroupName
+        :param signal_label: Signal label
+        :type signal_label: SignalLabel
+        """
+        self.group_name: GroupName = group_name
+        self.signal_label: SignalLabel = signal_label
+
 class Group:
 
     def __init__(self, name: str):
-        self.name: str = name
-        self.vars: dict[str, dict] = {}
+        self.name: GroupName = GroupName(name)
+        self.signals: dict[SignalLabel, SignalRecord] = {}
 
-    def add_data(self, label: str, data, *, tick_name: str = None) -> None:
+    def add_data(self, label: str, data: Any, *, tick_name: str = None) -> None:
         """
         Add a single data variable with a label and store it to the default group.
         Each call to this function will increase the sample time by one.
@@ -26,11 +60,13 @@ class Group:
         :param tick_name: Name parameter of corresponding TimeTick object, defaults to None
         :type tick_name: str, optional
         """
-        if label not in self.vars:
-            self.vars[label] = {}
+        signal_label = SignalLabel(label)
+        signal_value = SignalValue(data)
+        if signal_label not in self.signals:
+            self.signals[signal_label] = {}
         current_time = time.current_time
-        self.vars[label][current_time] = data
-        add_new_time_tick(current_time, tick_name)
+        new_time_tick = add_new_time_tick(current_time, tick_name)
+        self.signals[label][new_time_tick] = signal_value
         time.tick()
 
     def add_data_multi(self, data_dict: dict, *, tick_name: str = None) -> None:
@@ -48,8 +84,6 @@ class Group:
         time.pause()
         for label, data in data_dict.items():
             self.add_data(label, data)
-            current_time = time.current_time
-        add_new_time_tick(current_time, tick_name)
         time.resume()
 
     def plot(self, gui_engine: GuiEngine = GuiEngine.default) -> None:

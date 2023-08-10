@@ -8,12 +8,15 @@ You should import this file to use the package.
 from .gui_engines import GuiEngine
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
-from .models.group import Group
+from .models.group import (
+    Group,
+    GroupName
+)
 from .models.time_manager import time
 from .plot import plot_manager
 
-_groups: dict[str, Group] = {
-    const.DEFAULT_GROUP_NAME: Group(const.DEFAULT_GROUP_NAME)
+_groups: dict[GroupName, Group] = {
+    GroupName(const.DEFAULT_GROUP_NAME): Group(const.DEFAULT_GROUP_NAME)
 }
 """
 Global variable which stores different groups and saves them for later uses.
@@ -30,10 +33,11 @@ def create_group(name: str) -> Group:
     :param name: name of the group
     :return: an instance of the Group class
     """
-    if name in _groups:
+    group_name = GroupName(name)
+    if group_name in _groups:
         raise GroupAlreadyExistsError(name)
     group = Group(name)
-    _groups[name] = group
+    _groups[group_name] = group
     return group
 
 
@@ -45,9 +49,10 @@ def get_group(name: str) -> Group:
     :param name: target group name that you want to get
     :return: the created instance of Group class
     """
-    if name not in _groups:
+    group_name = GroupName(name)
+    if group_name not in _groups:
         raise GroupNotFoundError
-    return _groups[name]
+    return _groups[group_name]
 
 
 def add_data(label: str, data, *, tick_name: str = None) -> None:
