@@ -106,11 +106,12 @@ class TkPlotterWindow:
 		for line in range(self.num_of_lines):
 			self.clear_line(line=line)
 			signal_num = line + self.first_line
-			if signal_num >= self.num_of_signals:
-				continue
+			signal: GroupSignalPair = None
+			if signal_num < self.num_of_signals:
+				signal = self.signals[signal_num]
 			if line_change:
-				self.write_line_data(line=line, signal=self.signals[signal_num], time_ticks=self.time_ticks)
-			self.draw_line(line=line, signal=self.signals[signal_num])
+				self.write_line_data(line=line, signal=signal, time_ticks=self.time_ticks)
+			self.draw_line(line=line, signal=signal)
 
 	def clear_line(self, *, line: int) -> None:
 		"""
@@ -136,6 +137,10 @@ class TkPlotterWindow:
 		:param time_ticks: List of all TimeTick's in this bedbug session.
 		:type time_ticks: list[TimeTick]
 		"""
+		if signal == None:
+			one_period = [TkChar(SOFT_SPLIT, special=True)] + [TkChar(SPACE)] * self.tick_distance
+			self.line_data[line] = one_period * self.num_of_time_ticks
+			return
 		self.line_data[line] = []
 		value: str = ""
 		for tick in time_ticks:
@@ -172,8 +177,9 @@ class TkPlotterWindow:
 		:type signal: GroupSignalPair
 		"""
 		# Name frame
-		label = plot_utility.get_signal_full_label(group_name=signal.group_name, signal_label=signal.signal_label)
-		self.signal_name_frame.write_label(row=line, label=label)
+		if signal != None:
+			label = plot_utility.get_signal_full_label(group_name=signal.group_name, signal_label=signal.signal_label)
+			self.signal_name_frame.write_label(row=line, label=label)
 		# Plot frame
 		data = self.line_data[line]
 		for col in range(self.num_of_plot_columns):
