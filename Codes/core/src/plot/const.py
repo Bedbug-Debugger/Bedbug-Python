@@ -7,8 +7,8 @@ class PlotConst(Enum):
 class Color(Enum):
     PLOT_FG_NORMAL = '#ffffff'
     NAME_FG = '#000000'
-    NAME_INACTIVE_BG = '#EEEEEE'
-    NAME_ACTIVE_BG = '#ffddaa'
+    NAME_INACTIVE_BG = '#ddddff'
+    NAME_ACTIVE_BG = '#aaaaff'
     PLOT_BG = '#001160'
     PLOT_FG_SPECIAL = '#ff8800'
 
