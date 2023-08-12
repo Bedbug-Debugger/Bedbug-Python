@@ -82,3 +82,8 @@ class GroupSignalPair:
 	"""
 	group_name: GroupName
 	signal_label: SignalLabel
+
+@dataclass(eq=True, frozen=True)
+class TkChar:
+	char: str
+	special: bool = False
