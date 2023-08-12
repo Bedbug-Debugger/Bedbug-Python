@@ -9,12 +9,12 @@ from .gui_engines import GuiEngine
 from . import const
 from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
-from .models.wrappers import GroupName
+from .models import wrappers
 from .models.time_manager import time
 from .plot import plot_manager
 
-_groups: dict[GroupName, Group] = {
-    GroupName(const.DEFAULT_GROUP_NAME): Group(const.DEFAULT_GROUP_NAME)
+_groups: dict[wrappers.GroupName, Group] = {
+    wrappers.GroupName(const.DEFAULT_GROUP_NAME): Group(const.DEFAULT_GROUP_NAME)
 }
 """
 Global variable which stores different groups and saves them for later uses.
@@ -31,7 +31,7 @@ def create_group(name: str) -> Group:
     :param name: name of the group
     :return: an instance of the Group class
     """
-    group_name = GroupName(name)
+    group_name = wrappers.GroupName(name)
     if group_name in _groups:
         raise GroupAlreadyExistsError(name)
     group = Group(name)
@@ -47,7 +47,7 @@ def get_group(name: str) -> Group:
     :param name: target group name that you want to get
     :return: the created instance of Group class
     """
-    group_name = GroupName(name)
+    group_name = wrappers.GroupName(name)
     if group_name not in _groups:
         raise GroupNotFoundError(name)
     return _groups[group_name]
