@@ -115,7 +115,7 @@ class TkPlotterWindow:
 	def clear_line(self, *, line: int) -> None:
 		"""
 		Clear the name and plot in a line.
-		:param line: Line number (0 is the top visible line).
+		:param line: Line number (0 is the topmost visible line).
 		:type line: int
 		"""
 		# Name frame
@@ -129,7 +129,7 @@ class TkPlotterWindow:
 		"""
 		Internally store the characters to display in a line.
 		draw_line(...) decides which portion of this written data to show.
-		:param line: Line number (0 is the top visible line).
+		:param line: Line number (0 is the topmost visible line).
 		:type line: int
 		:param signal: A GroupSignalPair, denoting the signal to draw in this line.
 		:type signal: GroupSignalPair
@@ -166,7 +166,7 @@ class TkPlotterWindow:
 	def draw_line(self, *, line: int, signal: GroupSignalPair) -> None:
 		"""
 		Draw the name and plot in a line.
-		:param line: Line number (0 is the top visible line).
+		:param line: Line number (0 is the topmost visible line).
 		:type line: int
 		:param signal: A GroupSignalPair, denoting the signal to draw in this line.
 		:type signal: GroupSignalPair
@@ -366,6 +366,16 @@ class TkPlotFrame(TkFrame):
 		self.tk_element.grid(row=0, column=1)
 
 	def write_label(self, *, row: int, col: int, tkchar: TkChar) -> None:
+		"""
+		Write a character to a label, with special formatting.
+
+		:param row: Row number (0 is the topmost visible row).
+		:type row: int
+		:param col: Column number (0 is the leftmost visible column).
+		:type col: int
+		:param tkchar: TkChar object, holding a character and its attributes.
+		:type tkchar: TkChar
+		"""
 		label = self.signal_lines[row][col]
 		change(label, 'text', tkchar.char)
 		# bg
