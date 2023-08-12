@@ -120,29 +120,31 @@ class TkPlotterWindow:
 		:type time_ticks: list[TimeTick]
 		"""
 		self.line_data[line] = []
+		value: str = ""
 		for tick in time_ticks:
 			group_name = signal.group_name
 			signal_label = signal.signal_label
 			group = bd.get_group(group_name.name)
 			record = group.signals[signal_label]
+			new_value = False
 			if tick in record.record:
-				self.line_data[line].append(TkChar(HARD_SPLIT, True))
+				self.line_data[line].append(TkChar(HARD_SPLIT, special=True))
 				value = record.record[tick].value
-				value_is_long = (len(value) > self.tick_distance)
-				for data_col in range(self.tick_distance):
-					if value_is_long:
-						if data_col < self.tick_distance - 3:
-							self.line_data[line].append(TkChar(value[data_col]))
-						else:
-							self.line_data[line].append(TkChar(DOT))
-					else:
-						if data_col < len(value):
-							self.line_data[line].append(TkChar(value[data_col]))
-						else:
-							self.line_data[line].append(TkChar(SPACE))
+				new_value = True
 			else:
-				self.line_data[line].append(TkChar(SOFT_SPLIT, True))
-				self.line_data[line] += [TkChar(SPACE)] * self.tick_distance
+				self.line_data[line].append(TkChar(SOFT_SPLIT, special=True))
+			value_is_long = (len(value) > self.tick_distance)
+			for data_col in range(self.tick_distance):
+				if value_is_long:
+					if data_col < self.tick_distance - 3:
+						self.line_data[line].append(TkChar(value[data_col], new_value=new_value))
+					else:
+						self.line_data[line].append(TkChar(DOT, new_value=new_value))
+				else:
+					if data_col < len(value):
+						self.line_data[line].append(TkChar(value[data_col], new_value=new_value))
+					else:
+						self.line_data[line].append(TkChar(SPACE, new_value=new_value))
 	
 	def draw_line(self, *, line: int, signal: GroupSignalPair) -> None:
 		"""
@@ -314,7 +316,6 @@ class TkPlotFrame(TkFrame):
 		self.num_of_signals: int = len(signals)
 		self.num_of_lines: int = master.num_of_lines
 		self.num_of_columns: int = master.num_of_plot_columns
-		self.bg: str = Color.PLOT_BG.value
 		self.fg: str = Color.PLOT_FG_NORMAL.value
 		self.font: str = FONT_NORMAL
 		self.time_ticks: list[TimeTick] = None
@@ -328,7 +329,7 @@ class TkPlotFrame(TkFrame):
 				self.signal_lines[row][col] = tk.Label(
 					master=self.tk_element,
 					text=SPACE,
-					bg=self.bg,
+					bg=Color.PLOT_INACTIVE_BG.value,
 					fg=self.fg,
 					font=self.font
 				)
@@ -350,11 +351,20 @@ class TkPlotFrame(TkFrame):
 	def write_label(self, *, row: int, col: int, tkchar: TkChar) -> None:
 		label = self.signal_lines[row][col]
 		label['text'] = tkchar.char
+		# bg
+		if tkchar.new_value:
+			label['bg'] = Color.PLOT_ACTIVE_BG.value
+		else:
+			label['bg'] = Color.PLOT_INACTIVE_BG.value
+		# fg
 		if tkchar.special:
 			label['fg'] = Color.PLOT_FG_SPECIAL.value
-			label['font'] = FONT_BOLD
 		else:
 			label['fg'] = Color.PLOT_FG_NORMAL.value
+		# font
+		if tkchar.special:
+			label['font'] = FONT_BOLD
+		else:
 			label['font'] = FONT_NORMAL
 
 

@@ -87,3 +87,4 @@ class GroupSignalPair:
 class TkChar:
 	char: str
 	special: bool = False
+	new_value: bool = False

@@ -9,7 +9,8 @@ class Color(Enum):
     NAME_FG = '#000000'
     NAME_INACTIVE_BG = '#ddddff'
     NAME_ACTIVE_BG = '#aaaaff'
-    PLOT_BG = '#001160'
+    PLOT_INACTIVE_BG = '#001160'
+    PLOT_ACTIVE_BG = '#0066aa'
     PLOT_FG_SPECIAL = '#ff8800'
 
 SPACE = ' '
