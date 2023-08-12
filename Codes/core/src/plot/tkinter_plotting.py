@@ -11,4 +11,3 @@ def plot(signals: list[tuple[str, str]]) -> None:
     time_ticks = plot_utility.get_time_ticks(signals)
     TK_GUI = TkPlotterWindow("tk GUI", signals=signals)
     TK_GUI.tk_element.mainloop()
-    print('Meow')
