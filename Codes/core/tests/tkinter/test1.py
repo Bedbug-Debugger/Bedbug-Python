@@ -48,10 +48,20 @@ def multi_data():
 
 def long_history():
     for i in range(100):
-        pass
+        a = i + 1
+        b = i * 2
+        c = i // 2
+        bd.add_data_multi({
+            'i': i,
+            'a': a,
+            'b': b,
+            'c': c
+        })
+    bd.plot()
 
 def run():
     # empty_window()
     # first_window()
     # multi_tick()
-    multi_data()
+    # multi_data()
+    long_history()
