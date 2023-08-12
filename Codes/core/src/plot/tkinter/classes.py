@@ -18,6 +18,10 @@ from ...models.wrappers import (
 )
 from ... import bedbug as bd
 
+def change(element, param: str, value) -> None:
+	if element[param] != value:
+		element[param] = value
+
 class TkPlotterWindow:
 	"""
 	Wrapper class for managing the main tk.Tk window.
@@ -116,10 +120,10 @@ class TkPlotterWindow:
 		"""
 		# Name frame
 		for col in range(self.num_of_name_columns):
-			self.signal_name_frame.signal_lines[line][col]['text'] = SPACE
+			change(self.signal_name_frame.signal_lines[line][col], 'text', SPACE)
 		# Plot frame
 		for col in range(self.num_of_plot_columns):
-			self.signal_plot_frame.signal_lines[line][col]['text'] = SPACE
+			change(self.signal_plot_frame.signal_lines[line][col], 'text', SPACE)
 
 	def write_line_data(self, *, line: int, signal: GroupSignalPair, time_ticks: list[TimeTick]) -> None:
 		"""
@@ -292,8 +296,8 @@ class TkNameFrame(TkFrame):
 	def write_label(self, *, row: int, label: str) -> None:
 		for col in range(self.master.num_of_name_columns):
 			if col < len(label):
-				self.signal_lines[row][col]['text'] = label[col]
-			self.signal_lines[row][col]['bg'] = Color.NAME_ACTIVE_BG.value
+				change(self.signal_lines[row][col], 'text', label[col])
+			change(self.signal_lines[row][col], 'bg', Color.NAME_ACTIVE_BG.value)
 
 class TkPlotFrame(TkFrame):
 	"""
@@ -363,22 +367,22 @@ class TkPlotFrame(TkFrame):
 
 	def write_label(self, *, row: int, col: int, tkchar: TkChar) -> None:
 		label = self.signal_lines[row][col]
-		label['text'] = tkchar.char
+		change(label, 'text', tkchar.char)
 		# bg
 		if tkchar.new_value:
-			label['bg'] = Color.PLOT_ACTIVE_BG.value
+			change(label, 'bg', Color.PLOT_ACTIVE_BG.value)
 		else:
-			label['bg'] = Color.PLOT_INACTIVE_BG.value
+			change(label, 'bg', Color.PLOT_INACTIVE_BG.value)
 		# fg
 		if tkchar.special:
-			label['fg'] = Color.PLOT_FG_SPECIAL.value
+			change(label, 'fg', Color.PLOT_FG_SPECIAL.value)
 		else:
-			label['fg'] = Color.PLOT_FG_NORMAL.value
+			change(label, 'fg', Color.PLOT_FG_NORMAL.value)
 		# font
 		if tkchar.special:
-			label['font'] = FONT_BOLD
+			change(label, 'font', FONT_BOLD)
 		else:
-			label['font'] = FONT_NORMAL
+			change(label, 'font', FONT_NORMAL)
 
 
 
