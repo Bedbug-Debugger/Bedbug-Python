@@ -31,7 +31,23 @@ def multi_tick():
     bd.add_data('a', a)
     bd.plot()
 
+def multi_data():
+    a = 1
+    bd.add_data('a', a)
+    b = 'abcdefghijk'
+    bd.add_data('b', b)
+    c = 3
+    d = 's'
+    bd.add_data_multi({
+        'c': c,
+        'd': d
+    })
+    a = 4
+    bd.add_data('a', a)
+    bd.plot()
+
 def run():
     # empty_window()
     # first_window()
-    multi_tick()
+    # multi_tick()
+    multi_data()
