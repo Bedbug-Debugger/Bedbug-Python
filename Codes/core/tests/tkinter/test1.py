@@ -46,6 +46,10 @@ def multi_data():
     bd.add_data('a', a)
     bd.plot()
 
+def long_history():
+    for i in range(100):
+        pass
+
 def run():
     # empty_window()
     # first_window()

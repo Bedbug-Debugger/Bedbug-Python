@@ -72,6 +72,7 @@ class TkPlotterWindow:
 		:type event: tk.Event
 		"""
 		refresh_screen = False
+		line_change = False
 		if event.keysym == 'Left':
 			if self.first_col > 0:
 				self.first_col -= 1
@@ -80,21 +81,33 @@ class TkPlotterWindow:
 			if self.first_col + self.num_of_plot_columns <= self.line_data_length:
 				self.first_col += 1
 				refresh_screen = True
+		elif event.keysym == 'Up':
+			# TODO
+			line_change = True
+			refresh_screen = True
+		elif event.keysym == 'Down':
+			# TODO
+			line_change = True
+			refresh_screen = True
 		if refresh_screen:
-			self.draw_screen()
+			self.draw_screen(line_change=line_change)
 
-	def draw_screen(self) -> None:
+	def draw_screen(self, *, line_change: bool = True) -> None:
 		"""
 		(Re)draw the whole screen.
+
+		:param line_change: Whether write_line_data should be called, or not, defaults to True
+		:type line_change: bool
 		"""
 		for line in range(self.num_of_lines):
 			self.clear_line(line=line)
 			signal_num = line + self.first_line
 			if signal_num >= self.num_of_signals:
 				continue
-			self.write_line_data(line=line, signal=self.signals[signal_num], time_ticks=self.time_ticks)
+			if line_change:
+				self.write_line_data(line=line, signal=self.signals[signal_num], time_ticks=self.time_ticks)
 			self.draw_line(line=line, signal=self.signals[signal_num])
-	
+
 	def clear_line(self, *, line: int) -> None:
 		"""
 		Clear the name and plot in a line.
