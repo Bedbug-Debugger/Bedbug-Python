@@ -1,8 +1,11 @@
-from setuptools import setup
+from setuptools import (
+    setup,
+    find_namespace_packages
+)
 
 setup(
 	name='bedbug',
-	version='0.1.3',
+	version='0.1.4',
 	description='A light-weight package for visual debugging',
 	url='https://github.com/Bedbug-Debugger/Bedbug-Python',
 	author='Ali Hadizadeh Moghadam, Ali Shayanpoor',
@@ -10,11 +13,11 @@ setup(
 	license='MIT',
     
 	package_dir={"": "src"},
+	packages=find_namespace_packages(where='src'),
 
 	install_requires=[
 		'matplotlib'
 	],
-	packages=['bedbug'],
 	zip_safe=False,
     
 	include_package_data=True,
