@@ -37,6 +37,9 @@ class TkPlotterWindow:
 		"""
 		self.name: str = name
 		self.tk_element = tk.Tk()
+		self.tk_element.title("Bedbug plotter")
+		photo = tk.PhotoImage(file="core/assets/Icon_Transparent.png")
+		self.tk_element.iconphoto(False, photo)
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(self.signals)
