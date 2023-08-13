@@ -12,3 +12,16 @@ src/bedbug.egg-info/not-zip-safe
 src/bedbug.egg-info/requires.txt
 src/bedbug.egg-info/top_level.txt
 src/bedbug/assets/Icon_Transparent.png
+src/bedbug/errors/group_errors.py
+src/bedbug/errors/plot_errors.py
+src/bedbug/gui/const.py
+src/bedbug/gui/gui_engines.py
+src/bedbug/gui/plot_manager.py
+src/bedbug/gui/plot_utility.py
+src/bedbug/gui/pyplot_plotting.py
+src/bedbug/gui/tkinter_plotting.py
+src/bedbug/gui/tkinter/classes.py
+src/bedbug/models/const.py
+src/bedbug/models/group.py
+src/bedbug/models/time_manager.py
+src/bedbug/models/wrappers.py

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bedbug
-Version: 0.1.3
+Version: 0.1.4
 Summary: A light-weight package for visual debugging
 Home-page: https://github.com/Bedbug-Debugger/Bedbug-Python
 Author: Ali Hadizadeh Moghadam, Ali Shayanpoor
