@@ -63,5 +63,5 @@ def run():
     # empty_window()
     # first_window()
     # multi_tick()
-    # multi_data()
-    long_history()
+    multi_data()
+    # long_history()
