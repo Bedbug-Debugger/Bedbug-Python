@@ -1,5 +1,6 @@
 from __future__ import annotations
 import tkinter as tk
+import os
 
 from .. import plot_utility
 from ..const import (
@@ -39,7 +40,10 @@ class TkPlotterWindow:
 		self.tk_element = tk.Tk()
 		self.tk_element.title("Bedbug plotter")
 		# print(os.getcwd())
-		tk_icon = tk.PhotoImage(file="bedbug/assets/Icon_Transparent.png")
+		this_dir = os.path.dirname(__file__)
+		rel_path = "../../assets"
+		assets_dir = os.path.join(this_dir, rel_path)
+		tk_icon = tk.PhotoImage(file=f"{assets_dir}/Icon_Transparent.png")
 		self.tk_element.iconphoto(False, tk_icon)
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
