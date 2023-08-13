@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+src/bedbug/__init__.py
+src/bedbug/bedbug.py
+src/bedbug.egg-info/PKG-INFO
+src/bedbug.egg-info/SOURCES.txt
+src/bedbug.egg-info/dependency_links.txt
+src/bedbug.egg-info/not-zip-safe
+src/bedbug.egg-info/requires.txt
+src/bedbug.egg-info/top_level.txt
+src/bedbug/assets/Icon_Transparent.png
