@@ -1,2 +1,2 @@
-py -m build
+@ECHO OFF
 py -m twine upload --repository testpypi dist/*
