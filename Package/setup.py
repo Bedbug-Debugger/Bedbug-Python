@@ -12,7 +12,7 @@ setup(
 	install_requires=[
         'matplotlib'
 	],
-	packages=['bedbug'],
+	packages=['src/bedbug'],
 	zip_safe=False,
     
 	include_package_data=True,
