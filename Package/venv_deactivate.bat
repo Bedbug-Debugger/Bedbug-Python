@@ -1,2 +1,2 @@
-@ECHO OFF
-venv\Scripts\deactivate.bat
+@call venv\Scripts\deactivate.bat
+echo venv deactivated.
