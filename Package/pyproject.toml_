@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bedbug"
+version = "0.1.1"
+authors = [
+  {name="Ali Hadizadeh Moghadam", email="hadizadeh.ali@gmail.com"},
+  {name="Ali Shayanpoor", email="shayanpoor.ali66@gmail.com"},
+]
+description = "A light-weight package for visual debugging"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+  "matplotlib"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Bedbug-Debugger/Bedbug-Python"
+"Bug Tracker" = "https://github.com/Bedbug-Debugger/Bedbug-Python/issues"
