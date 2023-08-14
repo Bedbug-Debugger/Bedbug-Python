@@ -13,5 +13,14 @@ def func1():
 	bd.add_data('a', a)
 	bd.plot()
 
+def func2():
+	l = []
+	for i in range(20):
+		l += [i]
+		bd.add_data(f'{i*"a"}', l[i])
+	bd.plot()
+
+
 def test_run():
 	func1()
+	# func2()
