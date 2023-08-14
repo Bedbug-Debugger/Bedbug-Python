@@ -10,7 +10,11 @@ from ..const import (
     SOFT_SPLIT,
     DOT,
     FONT_BOLD,
-    FONT_NORMAL
+    FONT_NORMAL,
+	INIT_NUM_OF_LINES,
+	INIT_NUM_OF_NAME_COLUMNS,
+	INIT_NUM_OF_PLOT_COLUMNS,
+	INIT_TICK_DISTANCE
 )
 from ...models.wrappers import (
     GroupSignalPair,
@@ -46,10 +50,10 @@ class TkPlotterWindow:
 		self.num_of_signals: int = len(self.signals)
 		self.time_ticks: list[TimeTick] = plot_utility.get_time_ticks(self.signals)
 		self.num_of_time_ticks: int = len(self.time_ticks)
-		self.num_of_lines: int = 8
-		self.num_of_name_columns: int = 8
-		self.num_of_plot_columns: int = 30
-		self.tick_distance: int = 8
+		self.num_of_lines: int = INIT_NUM_OF_LINES
+		self.num_of_name_columns: int = INIT_NUM_OF_NAME_COLUMNS
+		self.num_of_plot_columns: int = INIT_NUM_OF_PLOT_COLUMNS
+		self.tick_distance: int = INIT_TICK_DISTANCE
 		self.first_line: int = 0
 		self.first_col: int = 0
 		self.line_data: list[list[TkChar]] = [None] * self.num_of_lines
