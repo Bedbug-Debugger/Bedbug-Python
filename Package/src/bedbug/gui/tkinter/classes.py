@@ -12,7 +12,8 @@ from ..const import (
     FONT_BOLD,
     FONT_NORMAL,
 	INIT_NUM_OF_LINES,
-	INIT_NUM_OF_NAME_COLUMNS,
+	MIN_NUM_OF_NAME_COLUMNS,
+	MAX_NUM_OF_NAME_COLUMNS,
 	INIT_NUM_OF_PLOT_COLUMNS,
 	INIT_TICK_DISTANCE
 )
@@ -52,9 +53,10 @@ class TkPlotterWindow:
 		self.time_ticks: list[TimeTick] = plot_utility.get_time_ticks(self.signals)
 		self.num_of_time_ticks: int = len(self.time_ticks)
 		self.num_of_lines: int = INIT_NUM_OF_LINES
-		self.num_of_name_columns: int = INIT_NUM_OF_NAME_COLUMNS
+		self.num_of_name_columns: int = None
 		self.num_of_plot_columns: int = INIT_NUM_OF_PLOT_COLUMNS
 		self.tick_distance: int = INIT_TICK_DISTANCE
+		self.auto_resize()
 		self.first_line: int = 0
 		self.first_col: int = 0
 		self.line_data: list[list[TkChar]] = [None] * self.num_of_lines
@@ -95,6 +97,10 @@ class TkPlotterWindow:
 		for signal in self.signals:
 			group_name, signal_label = signal.group_name, signal.signal_label
 			self.full_labels[signal] = plot_utility.get_signal_full_label(group_name=group_name, signal_label=signal_label)
+
+	def auto_resize(self) -> None:
+		max_name_length = max([len(label) for label in self.full_labels])
+		self.num_of_name_columns = max(MIN_NUM_OF_NAME_COLUMNS, min(max_name_length, MAX_NUM_OF_NAME_COLUMNS))
 
 	def handle_event(self, event: tk.Event) -> None:
 		"""
