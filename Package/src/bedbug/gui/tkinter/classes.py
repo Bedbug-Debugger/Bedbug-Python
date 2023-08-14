@@ -49,7 +49,8 @@ class TkPlotterWindow:
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(self.signals)
-		self.full_labels: dict[GroupSignalPair, str] = self.get_full_labels()
+		self.full_labels: dict[GroupSignalPair, str] = None
+		self.get_full_labels()
 		self.time_ticks: list[TimeTick] = plot_utility.get_time_ticks(self.signals)
 		self.num_of_time_ticks: int = len(self.time_ticks)
 		self.num_of_lines: int = INIT_NUM_OF_LINES
