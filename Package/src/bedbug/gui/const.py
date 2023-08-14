@@ -17,6 +17,6 @@ SPACE = ' '
 HARD_SPLIT = '#'
 SOFT_SPLIT = '|'
 DOT = '.'
-FONT_SIZE = 14
+FONT_SIZE = 18
 FONT_NORMAL = f'Courier {FONT_SIZE}'
 FONT_BOLD = f'Courier {FONT_SIZE} bold'
