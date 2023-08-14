@@ -99,7 +99,7 @@ class TkPlotterWindow:
 	def handle_event(self, event: tk.Event) -> None:
 		"""
 		Handle a given event.
-		:param event: tk event name.
+		:param event: tk event.
 		:type event: tk.Event
 		"""
 		refresh_screen = False
