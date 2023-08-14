@@ -39,12 +39,8 @@ class TkPlotterWindow:
 		self.name: str = name
 		self.tk_element = tk.Tk()
 		self.tk_element.title("Bedbug plotter")
-		# print(os.getcwd())
-		this_dir = os.path.dirname(__file__)
-		rel_path = "../../assets"
-		assets_dir = os.path.join(this_dir, rel_path)
-		tk_icon = tk.PhotoImage(file=f"{assets_dir}/Icon_Transparent.png")
-		self.tk_element.iconphoto(False, tk_icon)
+		self.tk_element.resizable(width=False, height=False)
+		self.set_icon()
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(self.signals)
@@ -76,6 +72,13 @@ class TkPlotterWindow:
 		self.tk_element.bind('<Key-Down>', self.handle_event)
 		# Draw
 		self.draw_screen()
+
+	def set_icon(self) -> None:
+		this_dir = os.path.dirname(__file__)
+		rel_path = "../../assets"
+		assets_dir = os.path.join(this_dir, rel_path)
+		tk_icon = tk.PhotoImage(file=f"{assets_dir}/Icon_Transparent.png")
+		self.tk_element.iconphoto(False, tk_icon)
 
 	def handle_event(self, event: tk.Event) -> None:
 		"""
