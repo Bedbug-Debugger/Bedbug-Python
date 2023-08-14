@@ -94,13 +94,16 @@ class TkPlotterWindow:
 				self.first_col += 1
 				refresh_screen = True
 		elif event.keysym == 'Up':
-			# TODO
+			if self.first_line > 0:
+				self.first_line -= 1
 			line_change = True
 			refresh_screen = True
 		elif event.keysym == 'Down':
-			# TODO
+			if self.first_line + self.num_of_lines <= self.num_of_signals:
+				self.first_line += 1
 			line_change = True
 			refresh_screen = True
+		
 		if refresh_screen:
 			self.draw_screen(line_change=line_change)
 
@@ -392,22 +395,26 @@ class TkPlotFrame(TkFrame):
 		"""
 		label = self.signal_lines[row][col]
 		change(label, 'text', tkchar.char)
+		
 		# bg
 		if tkchar.new_value:
 			change(label, 'bg', Color.PLOT_ACTIVE_BG.value)
 		else:
 			change(label, 'bg', Color.PLOT_INACTIVE_BG.value)
+		
 		# fg
 		if tkchar.special:
 			change(label, 'fg', Color.PLOT_FG_SPECIAL.value)
 		else:
 			change(label, 'fg', Color.PLOT_FG_NORMAL.value)
+		
 		# font
 		if tkchar.special:
 			change(label, 'font', FONT_BOLD)
+		elif tkchar.new_value:
+			change(label, 'font', FONT_BOLD)
 		else:
 			change(label, 'font', FONT_NORMAL)
-
 
 
 TK_GUI: TkPlotterWindow = None
