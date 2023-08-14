@@ -90,7 +90,7 @@ class TkPlotterWindow:
 				self.first_col -= 1
 				refresh_screen = True
 		elif event.keysym == 'Right':
-			if self.first_col + self.num_of_plot_columns <= self.line_data_length:
+			if self.first_col + self.num_of_plot_columns < self.line_data_length:
 				self.first_col += 1
 				refresh_screen = True
 		elif event.keysym == 'Up':
@@ -99,7 +99,7 @@ class TkPlotterWindow:
 			line_change = True
 			refresh_screen = True
 		elif event.keysym == 'Down':
-			if self.first_line + self.num_of_lines <= self.num_of_signals:
+			if self.first_line + self.num_of_lines < self.num_of_signals:
 				self.first_line += 1
 			line_change = True
 			refresh_screen = True
