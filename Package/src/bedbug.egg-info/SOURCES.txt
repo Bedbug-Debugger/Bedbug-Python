@@ -24,3 +24,4 @@ src/bedbug/models/const.py
 src/bedbug/models/group.py
 src/bedbug/models/time_manager.py
 src/bedbug/models/wrappers.py
+test/test_1.py
