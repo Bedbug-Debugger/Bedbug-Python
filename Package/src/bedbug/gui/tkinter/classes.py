@@ -411,8 +411,6 @@ class TkPlotFrame(TkFrame):
 		# font
 		if tkchar.special:
 			change(label, 'font', FONT_BOLD)
-		elif tkchar.new_value:
-			change(label, 'font', FONT_BOLD)
 		else:
 			change(label, 'font', FONT_NORMAL)
 
