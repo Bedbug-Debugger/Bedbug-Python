@@ -96,12 +96,13 @@ class TkPlotterWindow:
 		Store the full labels of the signals for plotting.
 		"""
 		for signal in self.signals:
-			group_name, signal_label = signal.group_name, signal.signal_label
+			group_name = signal.group_name
+			signal_label = signal.signal_label
 			self.full_labels[signal] = plot_utility.get_signal_full_label(group_name=group_name, signal_label=signal_label)
 
 	def auto_resize(self) -> None:
-		max_name_length = max([len(label) for label in self.full_labels.items()])
-		self.num_of_name_columns = max(MIN_NUM_OF_NAME_COLUMNS, max_name_length)
+		max_name_length = max([len(label) for label in self.full_labels.values()])
+		self.num_of_name_columns = max(MIN_NUM_OF_NAME_COLUMNS, max_name_length + 1)
 
 	def handle_event(self, event: tk.Event) -> None:
 		"""
