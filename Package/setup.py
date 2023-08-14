@@ -5,7 +5,7 @@ from setuptools import (
 
 setup(
 	name='bedbug',
-	version='0.1.12',
+	version='0.1.13',
 	description='A light-weight package for visual debugging',
 	url='https://github.com/Bedbug-Debugger/Bedbug-Python',
 	author='Ali Hadizadeh Moghadam, Ali Shayanpoor',
@@ -16,7 +16,7 @@ setup(
 	packages=find_namespace_packages(where='src'),
 
 	install_requires=[
-		"matplotlib >= 3.7.2"
+		"matplotlib"
 	],
 	zip_safe=False,
     
