@@ -48,6 +48,7 @@ class TkPlotterWindow:
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(self.signals)
+		self.full_labels: dict[GroupSignalPair, str] = self.get_full_labels()
 		self.time_ticks: list[TimeTick] = plot_utility.get_time_ticks(self.signals)
 		self.num_of_time_ticks: int = len(self.time_ticks)
 		self.num_of_lines: int = INIT_NUM_OF_LINES
@@ -78,11 +79,22 @@ class TkPlotterWindow:
 		self.draw_screen()
 
 	def set_icon(self) -> None:
+		"""
+		Set the tk window icon.
+		"""
 		this_dir = os.path.dirname(__file__)
 		rel_path = "../../assets"
 		assets_dir = os.path.join(this_dir, rel_path)
 		tk_icon = tk.PhotoImage(file=f"{assets_dir}/Icon_Transparent.png")
 		self.tk_element.iconphoto(False, tk_icon)
+
+	def get_full_labels(self) -> None:
+		"""
+		Store the full labels of the signals for plotting.
+		"""
+		for signal in self.signals:
+			group_name, signal_label = signal.group_name, signal.signal_label
+			self.full_labels[signal] = plot_utility.get_signal_full_label(group_name=group_name, signal_label=signal_label)
 
 	def handle_event(self, event: tk.Event) -> None:
 		"""
@@ -196,8 +208,7 @@ class TkPlotterWindow:
 		"""
 		# Name frame
 		if signal != None:
-			label = plot_utility.get_signal_full_label(group_name=signal.group_name, signal_label=signal.signal_label)
-			self.signal_name_frame.write_label(row=line, label=label)
+			self.signal_name_frame.write_label(row=line, label=self.full_labels[signal])
 		# Plot frame
 		data = self.line_data[line]
 		for col in range(self.num_of_plot_columns):
