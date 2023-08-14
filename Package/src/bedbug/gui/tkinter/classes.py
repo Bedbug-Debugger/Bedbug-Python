@@ -49,7 +49,7 @@ class TkPlotterWindow:
 		# Variables
 		self.signals: list[GroupSignalPair] = signals
 		self.num_of_signals: int = len(self.signals)
-		self.full_labels: dict[GroupSignalPair, str] = None
+		self.full_labels: dict[GroupSignalPair, str] = {}
 		self.get_full_labels()
 		self.time_ticks: list[TimeTick] = plot_utility.get_time_ticks(self.signals)
 		self.num_of_time_ticks: int = len(self.time_ticks)
@@ -100,8 +100,8 @@ class TkPlotterWindow:
 			self.full_labels[signal] = plot_utility.get_signal_full_label(group_name=group_name, signal_label=signal_label)
 
 	def auto_resize(self) -> None:
-		max_name_length = max([len(label) for label in self.full_labels])
-		self.num_of_name_columns = max(MIN_NUM_OF_NAME_COLUMNS, min(max_name_length, MAX_NUM_OF_NAME_COLUMNS))
+		max_name_length = max([len(label) for label in self.full_labels.items()])
+		self.num_of_name_columns = max(MIN_NUM_OF_NAME_COLUMNS, max_name_length)
 
 	def handle_event(self, event: tk.Event) -> None:
 		"""
