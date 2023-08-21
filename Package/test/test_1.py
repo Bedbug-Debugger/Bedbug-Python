@@ -22,5 +22,5 @@ def func2():
 
 
 def test_run():
-	func1()
-	# func2()
+	# func1()
+	func2()
