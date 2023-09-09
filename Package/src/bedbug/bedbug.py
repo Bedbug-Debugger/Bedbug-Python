@@ -2,8 +2,9 @@
 The main file of bedbug package.
 
 You should import this file to use the package.
-# TODO: add documentation for fundamental concepts.
 """
+
+import json
 
 from .gui.gui_engines import GuiEngine
 from .models import const
@@ -11,6 +12,7 @@ from .errors.group_errors import GroupNotFoundError, GroupAlreadyExistsError
 from .models.group import Group
 from .models import wrappers
 from .gui import plot_manager
+from .models import time_manager
 
 _groups: dict[wrappers.GroupName, Group] = {
 	wrappers.GroupName(const.DEFAULT_GROUP_NAME): Group(const.DEFAULT_GROUP_NAME)
@@ -95,10 +97,18 @@ def _plot(group: Group, gui_engine: GuiEngine = GuiEngine.default) -> None:
 	plot_manager.plot_manager(gui_engine=gui_engine, plot_group=group.name.name)
 
 
-# TODO
-
 def dump_json(filename: str) -> None:
-	pass
+	JSON = {'timetick': [], 'groups': {}}
+	for time_int, time_tick in time_manager.time_ticks_from_time.items():
+		JSON['timetick'].append([time_int, time_tick.tick_name])
+	for group_name, group in _groups.items():
+		JSON['groups'][group_name.name] = {}
+		for signal_label, record in group.signals.items():
+			JSON['groups'][group_name.name][signal_label.label] = []
+			for time_tick, signal_value in record.record.items():
+				JSON['groups'][group_name.name][signal_label.label].append([time_tick.time, signal_value.value])
+	json.dump(JSON, filename)
+
 
 def import_json(filename: str) -> None:
 	pass
