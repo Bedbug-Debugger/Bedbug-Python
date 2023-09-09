@@ -5,7 +5,7 @@ from setuptools import (
 
 setup(
 	name='bedbug',
-	version='0.1.14',
+	version='0.1.15',
 	description='A light-weight package for visual debugging',
 	url='https://github.com/Bedbug-Debugger/Bedbug-Python',
 	author='Ali Hadizadeh Moghadam, Ali Shayanpoor',
