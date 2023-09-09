@@ -13,6 +13,7 @@ from .models.group import Group
 from .models import wrappers
 from .gui import plot_manager
 from .models import time_manager
+from .models import wrappers
 
 _groups: dict[wrappers.GroupName, Group] = {
 	wrappers.GroupName(const.DEFAULT_GROUP_NAME): Group(const.DEFAULT_GROUP_NAME)
@@ -99,16 +100,41 @@ def _plot(group: Group, gui_engine: GuiEngine = GuiEngine.default) -> None:
 
 def dump_json(filename: str) -> None:
 	JSON = {'timetick': [], 'groups': {}}
-	for time_int, time_tick in time_manager.time_ticks_from_time.items():
-		JSON['timetick'].append([time_int, time_tick.tick_name])
+	# Add ticks
+	for tick_int, time_tick in time_manager.time_ticks_from_time.items():
+		JSON['timetick'].append([tick_int, time_tick.tick_name])
+	# Add data
 	for group_name, group in _groups.items():
 		JSON['groups'][group_name.name] = {}
 		for signal_label, record in group.signals.items():
 			JSON['groups'][group_name.name][signal_label.label] = []
 			for time_tick, signal_value in record.record.items():
 				JSON['groups'][group_name.name][signal_label.label].append([time_tick.time, signal_value.value])
+	# Write
 	json.dump(JSON, filename)
 
 
 def import_json(filename: str) -> None:
-	pass
+	# Read
+	JSON = json.load(filename)
+	# Get ticks
+	for tick in JSON['timetick']:
+		tick_int = tick[0]
+		tick_name = tick[1]
+		time_tick = wrappers.TimeTick(tick_int, tick_name)
+		time_manager.time_ticks_from_time[tick_int] = time_tick
+	# Get data
+	for group_name_str in JSON['groups']:
+		group = Group(group_name_str)
+		group_name = wrappers.GroupName(group_name_str)
+		for signal_label_str in JSON['groups'][group_name_str]:
+			signal_label = wrappers.SignalLabel(signal_label_str)
+			signal_record = wrappers.SignalRecord()
+			for tick in JSON['groups'][group_name_str][signal_label_str]:
+				tick_int = tick[0]
+				value = tick[1]
+				time_tick = time_manager.time_ticks_from_time[tick_int]
+				signal_value = wrappers.SignalValue(value)
+				signal_record[time_tick] = signal_value
+			group.signals[signal_label] = signal_record
+		_groups[group_name] = group
